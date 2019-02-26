@@ -8,7 +8,7 @@ public class Ent {
     public boolean Deplacement(Dir dir){
         switch (dir){
             case HAUT:{
-                if(Grille.)
+                //if(Grille.)
                 break;
             }
             case BAS:{
@@ -24,6 +24,7 @@ public class Ent {
                 break;
             }
         }
+        return false;
     }
 
 }

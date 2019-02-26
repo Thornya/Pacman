@@ -24,4 +24,7 @@ public class Jeu extends Observable implements Runnable{
     }
 
 
+    public boolean[][] getState() {
+        return new boolean[1][1];
+    }
 }
