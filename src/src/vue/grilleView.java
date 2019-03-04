@@ -8,6 +8,8 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
+import java.io.File;
+
 public class grilleView extends Application {
     private static AnchorPane mainPane;
     private static BorderPane border;
@@ -41,12 +43,12 @@ public class grilleView extends Application {
        // border.setLeft(bite);
         //border.setTop(bite2);
         border.setCenter(grid);
-        grid.setStyle("-fx-background-color: blue");
 
         grid.setPrefSize(600, 600);
         grid.setMaxSize(600, 600);
         grid.setMinSize(600, 600);
-
+        scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
+        grid.setId("mainGrid");
 
         root.getChildren().add(mainPane);
         double size = ((100/5) - (40/5));
@@ -60,14 +62,22 @@ public class grilleView extends Application {
         rowConstraint.setMaxHeight(Double.MAX_VALUE);
 
         for(int i = 0; i<31; i++){
-            grid.addColumn(i);
-            grid.getRowConstraints().add(rowConstraint);
             grid.addRow(i);
+            grid.getRowConstraints().add(rowConstraint);
+        }
+
+        for(int i = 0; i<25; i++){
+            grid.addColumn(i);
             grid.getColumnConstraints().add(columnConstraint);
         }
+
+
         grid.setGridLinesVisible(true);
-        grid.setStyle(" -fx-background-image:url('../ressources/52631.png')");
-        grid.setStyle("-fx-background-color: blue");
+        File f = new File("src\\src\\ressources\\52631.png");
+        System.out.println(f.exists());
+        if(f.exists() && !f.isDirectory()) {
+            // do something
+        }
 
         stage.setTitle("PacManChan");
         stage.setScene(scene);
@@ -77,8 +87,6 @@ public class grilleView extends Application {
     }
 
     public static void main(String[] args){
-
         Application.launch(args);
-
     }
 }
