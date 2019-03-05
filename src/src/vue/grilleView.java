@@ -66,7 +66,7 @@ public class grilleView extends Application {
             grid.getRowConstraints().add(rowConstraint);
         }
 
-        for(int i = 0; i<25; i++){
+        for(int i = 0; i<28; i++){
             grid.addColumn(i);
             grid.getColumnConstraints().add(columnConstraint);
         }
