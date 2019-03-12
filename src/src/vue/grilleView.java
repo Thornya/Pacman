@@ -4,7 +4,8 @@ import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
@@ -32,23 +33,15 @@ public class grilleView extends Application {
         mainPane.getChildren().add(border);
         grid = new GridPane();
 
-        //BorderPane.setAlignment(grid, Pos.CENTER);
-        //Button bite = new Button("bite");
-        //BorderPane.setAlignment(bite, Pos.CENTER);
-        //Button bite2 = new Button("bite2");
-        //BorderPane.setAlignment(bite2, Pos.CENTER);
-
         BorderPane.setAlignment(grid, Pos.CENTER);
-
-       // border.setLeft(bite);
-        //border.setTop(bite2);
         border.setCenter(grid);
 
-        grid.setPrefSize(600, 600);
-        grid.setMaxSize(600, 600);
-        grid.setMinSize(600, 600);
+        grid.setPrefSize(560, 620);
+        grid.setMaxSize(560, 620);
+        grid.setMinSize(560, 620);
         scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
         grid.setId("mainGrid");
+        mainPane.setId("mainPane");
 
         root.getChildren().add(mainPane);
         double size = ((100/5) - (40/5));
@@ -72,13 +65,15 @@ public class grilleView extends Application {
         }
 
 
+
         grid.setGridLinesVisible(true);
+        System.out.println(new File(".").getAbsolutePath());
         File f = new File("src\\src\\ressources\\52631.png");
         System.out.println(f.exists());
         if(f.exists() && !f.isDirectory()) {
             // do something
         }
-
+        this.addPane();
         stage.setTitle("PacManChan");
         stage.setScene(scene);
         stage.sizeToScene();
@@ -89,4 +84,20 @@ public class grilleView extends Application {
     public static void main(String[] args){
         Application.launch(args);
     }
+
+    private void addPane() {
+        StackPane coupPane = new StackPane();
+
+        //gestion Image
+        File temp = new File("C:\\Users\\p1812403\\IdeaProjects\\Pacman\\src\\src\\ressources\\gomme.png");
+        System.out.println(temp.exists());
+        ImageView test = new ImageView(new Image("file:///C:\\Users\\p1812403\\IdeaProjects\\Pacman\\src\\src\\ressources\\gomme.png"));
+        test.setFitWidth(20);
+        test.setFitHeight(20);
+        coupPane.getChildren().add(test);
+        StackPane.setAlignment(coupPane.getChildren().get(0), Pos.CENTER);
+        grid.add(coupPane, 1, 1);
+    }
+
+
 }

@@ -1,9 +1,9 @@
-body{
+#mainPane{
     -fx-background-color: black;
 }
 
 #mainGrid{
     -fx-background-image: url("../ressources/52631.png");
     -fx-background-repeat: stretch;
-    -fx-background-size: 600 600;
+    -fx-background-size: 560 620;
 }
