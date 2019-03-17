@@ -86,17 +86,43 @@ public class grilleView extends Application {
     }
 
     private void addPane() {
-        StackPane coupPane = new StackPane();
+        StackPane coupPane;
 
-        //gestion Image
-        File temp = new File("C:\\Users\\p1812403\\IdeaProjects\\Pacman\\src\\src\\ressources\\gomme.png");
-        System.out.println(temp.exists());
-        ImageView test = new ImageView(new Image("file:///C:\\Users\\p1812403\\IdeaProjects\\Pacman\\src\\src\\ressources\\gomme.png"));
-        test.setFitWidth(20);
-        test.setFitHeight(20);
-        coupPane.getChildren().add(test);
-        StackPane.setAlignment(coupPane.getChildren().get(0), Pos.CENTER);
-        grid.add(coupPane, 1, 1);
+        for(int i = 0; i < MapLoader.XSIZE; i++){
+            for(int j = 0; j < MapLoader.YSIZE; j++){
+                coupPane = new StackPane();
+                switch(MapLoader.BASEMAP[i][j]){
+                    case 1:{
+
+                        break;
+                    }
+                    case 2:{
+                        ImageView test = new ImageView("file:src\\src\\ressources\\gomme.png");
+                        test.setFitWidth(20);
+                        test.setFitHeight(20);
+                        coupPane.getChildren().add(test);
+                        StackPane.setAlignment(coupPane.getChildren().get(0), Pos.CENTER);
+                        grid.add(coupPane,j,i);
+                        break;
+                    }
+                    case 8:{
+                        File f = new File("src\\src\\ressources\\pacman.png");
+                        System.out.println(f.exists());
+                        ImageView test = new ImageView("file:src\\src\\ressources\\pacman.png");
+                        test.setFitWidth(20);
+                        test.setFitHeight(20);
+                        coupPane.getChildren().add(test);
+                        StackPane.setAlignment(coupPane.getChildren().get(0), Pos.CENTER);
+                        grid.add(coupPane,j,i);
+                        break;
+                    }
+                    default:{
+                        break;
+                    }
+                }
+            }
+
+        }
     }
 
 
