@@ -1,15 +1,18 @@
 package vue;
 
+import Modèle.Affichable;
+import Modèle.Gomme;
+import Modèle.MapLoader;
 import javafx.application.Application;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.util.Map;
 
 public class grilleView extends Application {
     private static AnchorPane mainPane;
@@ -54,12 +57,12 @@ public class grilleView extends Application {
         rowConstraint.setPercentHeight(size);
         rowConstraint.setMaxHeight(Double.MAX_VALUE);
 
-        for(int i = 0; i<31; i++){
+        for(int i = 0; i< MapLoader.YSIZE; i++){
             grid.addRow(i);
             grid.getRowConstraints().add(rowConstraint);
         }
 
-        for(int i = 0; i<28; i++){
+        for(int i = 0; i<MapLoader.XSIZE; i++){
             grid.addColumn(i);
             grid.getColumnConstraints().add(columnConstraint);
         }
@@ -73,11 +76,15 @@ public class grilleView extends Application {
         if(f.exists() && !f.isDirectory()) {
             // do something
         }
+        MapLoader.mapSetup();
+
         this.addPane();
         stage.setTitle("PacManChan");
         stage.setScene(scene);
         stage.sizeToScene();
         stage.setResizable(false);
+
+
         stage.show();
     }
 
@@ -88,8 +95,8 @@ public class grilleView extends Application {
     private void addPane() {
         StackPane coupPane;
 
-        for(int i = 0; i < MapLoader.XSIZE; i++){
-            for(int j = 0; j < MapLoader.YSIZE; j++){
+        for(int i = 0; i < MapLoader.YSIZE; i++){
+            for(int j = 0; j < MapLoader.XSIZE; j++){
                 coupPane = new StackPane();
                 switch(MapLoader.BASEMAP[i][j]){
                     case 1:{
@@ -97,7 +104,8 @@ public class grilleView extends Application {
                         break;
                     }
                     case 2:{
-                        ImageView test = new ImageView("file:src\\src\\ressources\\gomme.png");
+                        Gomme gommeTemp = (Gomme)MapLoader.getEntityOrItemAt(i,j).get(0);
+                        ImageView test = new ImageView(gommeTemp.getPath());
                         test.setFitWidth(20);
                         test.setFitHeight(20);
                         coupPane.getChildren().add(test);
@@ -106,8 +114,6 @@ public class grilleView extends Application {
                         break;
                     }
                     case 8:{
-                        File f = new File("src\\src\\ressources\\pacman.png");
-                        System.out.println(f.exists());
                         ImageView test = new ImageView("file:src\\src\\ressources\\pacman.png");
                         test.setFitWidth(20);
                         test.setFitHeight(20);

@@ -1,10 +1,9 @@
 package Modèle;
 
-public class PacMan extends Entities implements Runnable{
+public class PacMan extends Entities{
 
-
-    @Override
-    public void run() {
-
+    public PacMan(int x, int y) {
+        super("file:src\\src\\ressources\\pacman.png", x, y);
     }
+    
 }
