@@ -2,12 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0aaa07c0-ae3c-43fd-a357-5250ccf39ee2" name="Default Changelist" comment="">
+<<<<<<< Updated upstream
       <change afterPath="$PROJECT_DIR$/src/src/ressources/pacman.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/src/ressources/map.txt" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/src/ressources/map.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/src/Modèle/PacMan.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/Modèle/PacMan.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/src/vue/MapLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/vue/MapLoader.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/src/vue/grilleView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/vue/grilleView.java" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+>>>>>>> Stashed changes
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -34,6 +38,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/src/vue/grilleView.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
             <state relative-caret-position="101">
               <caret line="87" column="28" lean-forward="true" selection-start-line="87" selection-start-column="28" selection-end-line="87" selection-end-column="28" />
               <folding>
@@ -41,6 +46,10 @@
                 <element signature="e#2574#2575#0" expanded="true" />
                 <element signature="e#2614#2615#0" expanded="true" />
               </folding>
+=======
+            <state relative-caret-position="274">
+              <caret line="27" column="4" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="4" />
+>>>>>>> Stashed changes
             </state>
           </provider>
         </entry>
@@ -67,22 +76,27 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/src/vue/MapLoader.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
             <state relative-caret-position="408">
               <caret line="45" column="97" lean-forward="true" selection-start-line="45" selection-start-column="97" selection-end-line="45" selection-end-column="97" />
+=======
+            <state relative-caret-position="-729">
+              <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+>>>>>>> Stashed changes
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+<<<<<<< Updated upstream
         <entry file="file://$PROJECT_DIR$/src/src/main.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="34">
               <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
+=======
         <entry file="file://$PROJECT_DIR$/src/src/Jeu/Jeu.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="204">
@@ -91,8 +105,51 @@
           </provider>
         </entry>
       </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/src/vue/grilleView.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-56">
+              <caret line="54" column="27" lean-forward="true" selection-start-line="54" selection-start-column="27" selection-end-line="54" selection-end-column="27" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+>>>>>>> Stashed changes
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+<<<<<<< Updated upstream
+        <entry file="file://$PROJECT_DIR$/src/src/Jeu/Jeu.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="204">
+              <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+=======
+        <entry file="file://$PROJECT_DIR$/src/src/ressources/ezgif.com-crop (1).png">
+          <provider selected="true" editor-type-id="images" />
+        </entry>
+      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/src/ressources/map.txt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="476">
+              <caret line="28" column="55" lean-forward="true" selection-start-line="28" selection-start-column="55" selection-end-line="28" selection-end-column="55" />
+>>>>>>> Stashed changes
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+<<<<<<< Updated upstream
+        <entry file="file://$PROJECT_DIR$/src/src/ressources/map.txt">
+=======
+        <entry file="file://$PROJECT_DIR$/src/src/ressources/52631.png">
+          <provider selected="true" editor-type-id="images" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/src/vue/style.css">
+>>>>>>> Stashed changes
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="342">
               <caret line="32" selection-start-line="32" selection-end-line="41" selection-end-column="9" />
@@ -190,6 +247,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -247,14 +306,21 @@
           <select />
         </subPane>
       </pane>
+<<<<<<< Updated upstream
       <pane id="Scope" />
       <pane id="PackagesPane" />
+=======
+>>>>>>> Stashed changes
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+<<<<<<< Updated upstream
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552862473228" />
+=======
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552410152661" />
+>>>>>>> Stashed changes
     <property name="jdk.selected.JAVA_MODULE" value="1.8" />
     <property name="last_opened_file_path" value="E:/Logiciels/Git/bin/git.exe" />
     <property name="project.structure.last.edited" value="Project" />
@@ -263,14 +329,14 @@
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\lucas\OneDrive\Bureau\Polytech\3A\S6\Projet\ProjetS6-PACMAN\Pacman\src\src\ressources" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="E:\Polytech\ProjetPacMan\Pacman\src\src\ressources" />
       <recent name="C:\Users\lucas\OneDrive\Bureau\Polytech\3A\S6\Projet\ProjetS6-PACMAN\Pacman\src\src\ressources" />
       <recent name="C:\Users\p1812403\IdeaProjects\Pacman\t2\src\src" />
       <recent name="C:\Users\p1812403\IdeaProjects\Pacman\t2\ressources" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\lucas\OneDrive\Bureau\Polytech\3A\S6\Projet\ProjetS6-PACMAN\Pacman\src\src\ressources" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -320,8 +386,8 @@
       </method>
     </configuration>
     <list>
-      <item itemvalue="Application.main" />
       <item itemvalue="Application.grilleView" />
+      <item itemvalue="Application.main" />
       <item itemvalue="Application.startView" />
     </list>
     <recent_temporary>
@@ -343,6 +409,7 @@
       <updated>1549373247515</updated>
       <workItem from="1551194353701" duration="6894000" />
     </task>
+<<<<<<< Updated upstream
     <task id="LOCAL-00001" summary="refresh image">
       <created>1552408608210</created>
       <option name="number" value="00001" />
@@ -351,6 +418,23 @@
       <updated>1552408608210</updated>
     </task>
     <option name="localTasksCounter" value="2" />
+=======
+    <task id="LOCAL-00001" summary="ok">
+      <created>1552407945760</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1552407945760</updated>
+    </task>
+    <task id="LOCAL-00002" summary="heu">
+      <created>1552410151808</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1552410151808</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
+>>>>>>> Stashed changes
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -366,9 +450,15 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
+<<<<<<< Updated upstream
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21108742" />
+=======
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25302014" />
+>>>>>>> Stashed changes
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -376,9 +466,15 @@
       <window_info id="Capture Tool" order="5" />
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
+<<<<<<< Updated upstream
       <window_info anchor="bottom" id="Find" order="1" weight="0.3290993" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.3261105" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39869988" />
+=======
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32719547" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3991323" />
+>>>>>>> Stashed changes
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.32936078" />
@@ -403,8 +499,14 @@
     <option name="version" value="1" />
   </component>
   <component name="VcsManagerConfiguration">
+<<<<<<< Updated upstream
     <MESSAGE value="refresh image" />
     <option name="LAST_COMMIT_MESSAGE" value="refresh image" />
+=======
+    <MESSAGE value="ok" />
+    <MESSAGE value="heu" />
+    <option name="LAST_COMMIT_MESSAGE" value="heu" />
+>>>>>>> Stashed changes
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/.idea/Pacman.iml">
@@ -423,17 +525,25 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/src/Lib/GrilleK.java" />
+<<<<<<< Updated upstream
     <entry file="file://$PROJECT_DIR$/src/src/ressources/PacmanLevel-1.png" />
     <entry file="file://$PROJECT_DIR$/src/src/vue/style.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="17">
           <caret line="1" column="31" selection-start-line="1" selection-start-column="31" selection-end-line="1" selection-end-column="31" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/src/main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" column="24" selection-start-line="9" selection-start-column="24" selection-end-line="9" selection-end-column="24" />
+>>>>>>> Stashed changes
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/src/Console.java">
+    <entry file="file://$PROJECT_DIR$/src/src/Lib/Grille.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
+<<<<<<< Updated upstream
           <caret line="19" selection-start-line="19" selection-end-line="19" />
         </state>
       </provider>
@@ -456,6 +566,28 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
           <caret line="2" column="18" selection-start-line="2" selection-start-column="18" selection-end-line="2" selection-end-column="18" />
+=======
+          <caret line="17" column="5" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
+          <folding>
+            <element signature="e#304#305#0" expanded="true" />
+            <element signature="e#349#350#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/src/ressources/PacmanLevel-1.png" />
+    <entry file="file://$PROJECT_DIR$/src/src/Console.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/src/vue/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" column="57" selection-start-line="5" selection-start-column="57" selection-end-line="5" selection-end-column="57" />
+>>>>>>> Stashed changes
         </state>
       </provider>
     </entry>
@@ -466,21 +598,40 @@
         </state>
       </provider>
     </entry>
+<<<<<<< Updated upstream
     <entry file="file://$PROJECT_DIR$/src/src/Modèle/Gomme.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" selection-start-line="8" selection-end-line="8" />
+=======
+    <entry file="file://$PROJECT_DIR$/src/src/ressources/map.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="28" column="55" lean-forward="true" selection-start-line="28" selection-start-column="55" selection-end-line="28" selection-end-column="55" />
+>>>>>>> Stashed changes
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/src/Lib/Grille.java">
+    <entry file="file://$PROJECT_DIR$/src/src/Lib/Dir.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
         <state relative-caret-position="255">
           <caret line="17" column="5" selection-start-line="17" selection-start-column="5" selection-end-line="17" selection-end-column="5" />
           <folding>
             <element signature="e#304#305#0" expanded="true" />
             <element signature="e#349#350#0" expanded="true" />
           </folding>
+=======
+        <state relative-caret-position="34">
+          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/src/Lib/Ent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="274">
+          <caret line="27" column="4" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="4" />
+>>>>>>> Stashed changes
         </state>
       </provider>
     </entry>
@@ -520,8 +671,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/src/vue/startView.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
         <state relative-caret-position="-16">
           <caret line="41" column="10" selection-start-line="41" selection-start-column="10" selection-end-line="41" selection-end-column="10" />
+=======
+        <state relative-caret-position="-729">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+>>>>>>> Stashed changes
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#2093#2094#0" expanded="true" />
@@ -530,12 +686,17 @@
         </state>
       </provider>
     </entry>
+<<<<<<< Updated upstream
     <entry file="file://$PROJECT_DIR$/src/src/main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
           <caret line="2" column="13" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
         </state>
       </provider>
+=======
+    <entry file="file://$PROJECT_DIR$/src/src/ressources/ezgif.com-crop (1).png">
+      <provider selected="true" editor-type-id="images" />
+>>>>>>> Stashed changes
     </entry>
     <entry file="file://$PROJECT_DIR$/src/src/Jeu/Jeu.java">
       <provider selected="true" editor-type-id="text-editor">
@@ -546,6 +707,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/src/Modèle/PacMan.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
         <state relative-caret-position="68">
           <caret line="4" selection-start-line="4" selection-end-line="4" />
         </state>
@@ -566,6 +728,16 @@
         </state>
       </provider>
     </entry>
+=======
+        <state relative-caret-position="-56">
+          <caret line="54" column="27" lean-forward="true" selection-start-line="54" selection-start-column="27" selection-end-line="54" selection-end-column="27" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+>>>>>>> Stashed changes
   </component>
   <component name="masterDetails">
     <states>
