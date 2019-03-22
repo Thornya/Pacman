@@ -1,4 +1,6 @@
 package Modèle;
+import Lib.Dir;
+
 import java.util.ArrayList;
 
 public class Entities implements Affichable{
@@ -7,6 +9,7 @@ public class Entities implements Affichable{
     private int xPos;
     private int yPos;
     private State state = State.NORMAL;
+    private Dir currDirection = Dir.HAUT;
 
     public Entities(String imgPath, int xPos, int yPos) {
         this.imgPaths.add(imgPath);

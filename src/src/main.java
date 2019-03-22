@@ -1,12 +1,12 @@
 import Jeu.Jeu;
+import Modèle.GlobalGameController;
 
 public class main {
 
     public static void main(String args[]){
-        Jeu jeu = new Jeu();
-        Console c = new Console(jeu);
+        GlobalGameController ggc = new GlobalGameController();
 
 
-        new Thread(jeu).start();
+        new Thread(ggc).start();
     }
 }

@@ -1,8 +1,10 @@
 package Modèle;
 
 import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
 
-public class MapLoader {
+public class MapLoader implements Observer {
 
     /*
     0 = vide
@@ -59,7 +61,6 @@ public class MapLoader {
     private static void copyMap(){
         for (int i = 0; i<YSIZE; i++)
             for (int j = 0; j<XSIZE; j++) {
-                System.out.println(i + "y, x" + j);
                 currentMap[i][j] = BASEMAP[i][j];
             }
     }
@@ -71,8 +72,6 @@ public class MapLoader {
     }
 
     public static ArrayList<Affichable> getEntityOrItemAt(int x, int y){
-        System.out.println(x+","+y);
-        System.out.println(affichablesMap[x][y]);
         return affichablesMap[x][y];
     }
 
@@ -93,16 +92,16 @@ public class MapLoader {
                         affichablesMap[i][j].add(new SuperGomme());
                         break;
                     case 4:
-                        //affichablesMap[i][j].add(new FantomeR());
+                        affichablesMap[i][j].add(new FantomeR(j, i));
                         break;
                     case 5:
-                        //affichablesMap[i][j].add(new FantomeB);
+                        affichablesMap[i][j].add(new FantomeB(j, i));
                         break;
                     case 6:
-                        //affichablesMap[i][j].add(new FantomeV);
+                        affichablesMap[i][j].add(new FantomeV(j, i));
                         break;
                     case 7:
-                        //affichablesMap[i][j].add(new FantomeO);
+                        affichablesMap[i][j].add(new FantomeO(j, i));
                         break;
                     case 8:
                         affichablesMap[i][j].add(new PacMan(j, i));
@@ -115,5 +114,11 @@ public class MapLoader {
         currentMap =  new int[YSIZE][XSIZE];
         copyMap();
         affichablesMapFill();
+    }
+
+
+    @Override
+    public void update(Observable o, Object arg) {
+
     }
 }
