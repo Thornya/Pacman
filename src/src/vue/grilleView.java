@@ -2,29 +2,26 @@ package vue;
 
 import Lib.Dir;
 import Modèle.*;
-import com.sun.jndi.toolkit.ctx.PartialCompositeContext;
 import javafx.application.Application;
-import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import java.io.File;
-import java.util.Map;
 
 public class grilleView extends Application {
     private static AnchorPane mainPane;
     private static BorderPane border;
     private static GridPane grid;
+    static boolean t = false;
 
     @Override
     public void start(Stage stage) {
+
         Group root = new Group();
         Scene scene = new Scene(root);
 
@@ -39,7 +36,8 @@ public class grilleView extends Application {
 
         mainPane.getChildren().add(border);
         grid = new GridPane();
-
+        GlobalGameController ggc = new GlobalGameController();
+        new Thread(ggc).start();
         BorderPane.setAlignment(grid, Pos.CENTER);
         border.setCenter(grid);
 
@@ -107,6 +105,14 @@ public class grilleView extends Application {
 
     public static void main(String[] args){
         Application.launch(args);
+    }
+
+    public static void graphicMove(int xStart, int yStart, int xEnd, int yEnd){
+        System.out.println("t2");
+        System.out.println(grid.getChildren());
+        System.out.println(grid.getChildren().get(yStart*MapLoader.XSIZE+xStart));
+
+        System.out.println("t3");
     }
 
     private void addPane() {

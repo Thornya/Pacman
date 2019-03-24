@@ -2,7 +2,7 @@ package Modèle;
 
 public class Items implements Affichable{
     protected String path;
-
+    private int mapCode;
     public Items(String path) {
         this.path = path;
     }
@@ -14,5 +14,12 @@ public class Items implements Affichable{
     @Override
     public void afficher() {
 
+    }
+
+    public int getMapCode(){
+        return mapCode;
+    }
+    public void setMapCode(int code){
+        mapCode = code;
     }
 }

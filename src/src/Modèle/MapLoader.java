@@ -1,5 +1,7 @@
 package Modèle;
 
+import vue.grilleView;
+
 import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
@@ -11,11 +13,11 @@ public class MapLoader implements Observer {
     1 = mur
     2 = petite gomme
     3 = maxi gomme
-    4 = fantome (spawn) rouge
+    4 = fantome rouge
     5 = fantome bleu
     6 = fantome violet
     7 = fantome orange
-    8 = pacman (spawn)
+    8 = pacman
     9 = porte
      */
 
@@ -104,7 +106,8 @@ public class MapLoader implements Observer {
                         affichablesMap[i][j].add(new FantomeO(j, i));
                         break;
                     case 8:
-                        affichablesMap[i][j].add(new PacMan(j, i));
+                        System.out.println(i+ " " + j);
+                        affichablesMap[i][j].add(PacMan.getInstance());
                 }
 
             }
@@ -120,5 +123,32 @@ public class MapLoader implements Observer {
     @Override
     public void update(Observable o, Object arg) {
 
+    }
+
+    public static void moveCase(int xStart, int yStart, int xEnd, int yEnd, Entities ent){
+        affichablesMap[xStart][yStart].remove(ent);
+        if (affichablesMap[xStart][yStart].size() != 0)
+            currentMap[xStart][yStart] = affichablesMap[xStart][xEnd].get(0).getMapCode();
+
+        if (ent instanceof PacMan) {
+            for (Affichable a : affichablesMap[xEnd][yEnd]) {
+                if (a instanceof Fantome) {
+                    GlobalGameController.gameOver();
+                    return;
+                } else if (a instanceof Items) {
+                    if (a instanceof SuperGomme)
+                        GlobalGameController.addScore(50);
+                    else
+                        GlobalGameController.addScore(10);
+                    affichablesMap[xEnd][yEnd].remove(a);
+                }
+            }
+        }
+
+        affichablesMap[xEnd][yEnd].add(ent);
+        currentMap[xEnd][yEnd] = affichablesMap[xEnd][yEnd].get(affichablesMap[xEnd][yEnd].size()-1).getMapCode();
+        System.out.println("t1");
+        grilleView.graphicMove(xStart, yStart, xEnd, yEnd);
+        System.out.println("terminé");
     }
 }

@@ -3,12 +3,15 @@ import Lib.Dir;
 
 import java.util.ArrayList;
 
-public class Entities implements Affichable{
+public abstract class Entities implements Affichable, Movable{
 
     private ArrayList<String> imgPaths = new ArrayList<String>();
+    private int mapCode;
     private int xPos;
     private int yPos;
     private State state = State.NORMAL;
+
+
     private Dir currDirection = Dir.HAUT;
 
     public Entities(String imgPath, int xPos, int yPos) {
@@ -19,10 +22,10 @@ public class Entities implements Affichable{
 
 
     @Override
-    public void afficher() {
+    public abstract void afficher();
 
-    }
-
+    @Override
+    public abstract void move();
 
     public ArrayList<String> getImgPaths() {
         return imgPaths;
@@ -42,4 +45,15 @@ public class Entities implements Affichable{
     public void setyPos(int yPos) {
         this.yPos = yPos;
     }
+    public int getMapCode(){
+        return mapCode;
+    }
+    public void setMapCode(int code){
+        mapCode = code;
+    }
+    public void setCurrDirection(Dir currDirection) {
+        this.currDirection = currDirection;
+    }
+
+
 }

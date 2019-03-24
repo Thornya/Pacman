@@ -8,4 +8,14 @@ public class Fantome extends Entities implements Affichable{
     public Fantome(String imgPath, int xPos, int yPos) {
         super(imgPath, xPos, yPos);
     }
+
+    @Override
+    public void afficher() {
+
+    }
+
+    @Override
+    public void move() {
+
+    }
 }
