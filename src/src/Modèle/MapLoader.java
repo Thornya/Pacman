@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import vue.grilleView;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -129,40 +130,76 @@ public class MapLoader implements Observer {
     }
 
     public static void moveCase(int xStart, int yStart, int xEnd, int yEnd, Entities ent) {
+        boolean hasBeenEaten = false;
         affichablesMap[yStart][xStart].remove(ent);
         if (affichablesMap[yStart][xStart].size() != 0)
             currentMap[yStart][xStart] = affichablesMap[yStart][xStart].get(0).getMapCode();
-        Affichable affichableTemp = null;
+        List<Affichable> affichableTemp = new ArrayList<>();
         if (ent instanceof PacMan) {
             for (Affichable a : affichablesMap[yEnd][xEnd]) {
                 if (a instanceof Fantome) {
-                    GlobalGameController.gameOver();
-                    return;
+                    if(ent.getState()==State.NORMAL){
+                        GlobalGameController.gameOver();
+                        return;
+                    }
+                    else{
+                        //manger fantome
+                        affichableTemp.add(a);
+                    }
                 } else if (a instanceof Items) {
-                    if (a instanceof SuperGomme)
+                    if (a instanceof SuperGomme) {
                         GlobalGameController.addScore(50);
+                        ((PacMan) ent).mangerSGomme();
+                    }
                     else
                         GlobalGameController.addScore(10);
                     cptGomme--;
-                    affichableTemp = a;
+                    affichableTemp.add(a);
                     Platform.runLater(()->{
                         grilleView.miam(xEnd, yEnd);
                     });
                     if(cptGomme<=0){
-                        //TODO : gérer la victoire
                         System.out.println("game over");
                         GlobalGameController.gameOver();
                     }
                 }
             }
         }
-        if (affichableTemp != null) {
-            affichablesMap[yEnd][xEnd].remove(affichableTemp);
+        else {
+            for (Affichable a : affichablesMap[yEnd][xEnd]) {
+                System.out.println(a);
+                if (a instanceof PacMan) {
+                    System.out.println("est passé la ////////////////");
+                    if (ent.getState() == State.NORMAL) {
+                        GlobalGameController.gameOver();
+                        return;
+                    } else {
+                        //manger fantome
+                        System.out.println("ici -----------------------  " + ent);
+                        affichableTemp.add(ent);
+                        hasBeenEaten = true;
+
+                    }
+                }
+            }
         }
-        affichablesMap[yEnd][xEnd].add(ent);
-        currentMap[yEnd][xEnd] = affichablesMap[yEnd][xEnd].get(affichablesMap[yEnd][xEnd].size() - 1).getMapCode();
-        Platform.runLater(()->{
-            grilleView.graphicMove(xStart, yStart, xEnd, yEnd, ent);
-                });
+
+        for(Affichable affDel : affichableTemp){
+            if(affDel instanceof Fantome){
+                if (hasBeenEaten)
+                    moveCase(xStart,yStart,((Fantome) affDel).getxInitPos(),((Fantome) affDel).getyInitPos(),(Entities) affDel);
+                else
+                    moveCase(xEnd,yEnd,((Fantome) affDel).getxInitPos(),((Fantome) affDel).getyInitPos(),(Entities) affDel);
+                ((Fantome) affDel).setxPos(((Fantome) affDel).getxInitPos());
+                ((Fantome) affDel).setyPos(((Fantome) affDel).getyInitPos());
+            }
+            else
+                affichablesMap[yEnd][xEnd].remove(affDel);
+        }
+        if (!hasBeenEaten) {
+            affichablesMap[yEnd][xEnd].add(ent);
+            currentMap[yEnd][xEnd] = affichablesMap[yEnd][xEnd].get(affichablesMap[yEnd][xEnd].size() - 1).getMapCode();
+            Platform.runLater(() -> grilleView.graphicMove(xStart, yStart, xEnd, yEnd, ent));
+        }
     }
 }

@@ -10,7 +10,7 @@ public abstract class Entities implements Affichable, Movable{
     private int xInitPos;
     private int yInitPos;
 
-    private State state = State.NORMAL;
+    protected State state = State.NORMAL;
     private boolean hasMoved = false;
 
     private String id;

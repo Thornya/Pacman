@@ -110,6 +110,8 @@ public class grilleView {
         StackPane pane = (StackPane) grid.getChildren().get(yStart * MapLoader.XSIZE + xStart + 1);
         StackPane pane2 = (StackPane) grid.getChildren().get(yEnd * MapLoader.XSIZE + xEnd + 1);
         ImageView iv = null;
+        System.out.println(xStart + " - >" + xEnd);
+        System.out.println(yStart+ " -> " + yEnd);
         for (Node node :  pane.getChildren()){
             iv = (ImageView) node;
             if (iv.getStyleClass().contains(ent.getId()))
@@ -117,13 +119,13 @@ public class grilleView {
         }
 
         pane.getChildren().remove(iv);
+        System.out.println("ent: "+ent + "    iv: "+iv);
         pane2.getChildren().add(iv);
     }
 
     public static void miam(int x, int y){
         StackPane pane = (StackPane) grid.getChildren().get(y * MapLoader.XSIZE + x + 1);
         pane.getChildren().remove(0);
-
     }
 
     private static void setupGrilleGraphique() {
