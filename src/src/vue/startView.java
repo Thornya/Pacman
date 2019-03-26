@@ -53,7 +53,6 @@ public class startView extends Application {
 
         System.out.println(menu);
 
-       // menu.setGridLinesVisible(true);
         mainPane.getChildren().add(menu);
 
         scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
@@ -73,12 +72,8 @@ public class startView extends Application {
         menu.add(playButton, 1 ,3 );
         menu.add(quitButton, 1 ,4 );
 
-        playButton.setOnAction(event -> {
-            grilleView.setupGrilleView(mainPane);
-        });
-        quitButton.setOnAction(event -> {
-            stage.close();
-        });
+        playButton.setOnAction(event -> grilleView.setupGrilleView(mainPane));
+        quitButton.setOnAction(event -> stage.close());
         stage.setTitle("PacManChan");
         stage.setScene(scene);
         stage.sizeToScene();

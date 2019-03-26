@@ -9,18 +9,18 @@ import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-import java.io.File;
-
 public class grilleView {
-    private static AnchorPane mainPane;
     private static BorderPane border;
     public static GridPane grid;
+    private static AnchorPane mainPane;
 
 
     public static void setupGrilleView(AnchorPane mainPane) {
+        grilleView.mainPane = mainPane;
         mainPane.getChildren().clear();
         Stage stage = (Stage) mainPane.getScene().getWindow();
         Group root = new Group();
@@ -50,12 +50,10 @@ public class grilleView {
         mainPane.setId("mainPane");
         scene.getStylesheets().add("vue/style.css");
 
-
         //Recentrer la fenêtre lors du changement de taille
         Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
         stage.setX((screenBounds.getWidth() - stage.getWidth()) / 2.5);
         stage.setY(((screenBounds.getHeight() - stage.getHeight()) / 4));
-
 
         root.getChildren().add(mainPane);
         double size = ((100/5) - (40/5));
@@ -76,9 +74,6 @@ public class grilleView {
             grid.addColumn(i);
             grid.getColumnConstraints().add(columnConstraint);
         }
-
-
-
         grid.setGridLinesVisible(true);
 
 
@@ -106,10 +101,6 @@ public class grilleView {
         stage.setTitle("PacManChan");
         stage.setScene(scene);
         stage.sizeToScene();
-        stage.setResizable(false);
-
-
-        stage.show();
     }
 
     public static void graphicMove(int xStart, int yStart, int xEnd, int yEnd, Entities ent){
@@ -160,27 +151,27 @@ public class grilleView {
                     }
                     case 4:{
                         FantomeR fantTemp = (FantomeR)MapLoader.getEntityOrItemAt(i,j).get(0);
-                       // setupImageView(coupPane, fantTemp.getPath(), i, j);
+                        setupImageView(coupPane, fantTemp.getImgPath(), i, j);
                         break;
                     }
                     case 5:{
                         FantomeB fantTemp = (FantomeB)MapLoader.getEntityOrItemAt(i,j).get(0);
-                        //setupImageView(coupPane, fantTemp.getPath(), i, j);
+                        setupImageView(coupPane, fantTemp.getImgPath(), i, j);
                         break;
                     }
                     case 6:{
                         FantomeV fantTemp = (FantomeV)MapLoader.getEntityOrItemAt(i,j).get(0);
-                        //setupImageView(coupPane, fantTemp.getPath(), i, j);
+                        setupImageView(coupPane, fantTemp.getImgPath(), i, j);
                         break;
                     }
                     case 7:{
                         FantomeO fantTemp = (FantomeO)MapLoader.getEntityOrItemAt(i,j).get(0);
-                        //setupImageView(coupPane, fantTemp.getPath(), i, j);
+                        setupImageView(coupPane, fantTemp.getImgPath(), i, j);
                         break;
                     }
                     case 8:{
                         PacMan pacManTemp = (PacMan)MapLoader.getEntityOrItemAt(i,j).get(0);
-                        //setupImageView(coupPane, pacManTemp.getPath(), i, j);
+                        setupImageView(coupPane, pacManTemp.getImgPath(), i, j);
                         break;
                     }
                     case 9:{
@@ -210,4 +201,24 @@ public class grilleView {
         grid.add(sp,j,i);
     }
 
+
+    private void popUpWinner() {/*
+        Stage stageNewWindow = new Stage();
+        Stage currentStage = (Stage) mainPane.getScene().getWindow();
+        try {
+            AnchorPane root = FXMLLoader.load(getClass().getResource("../vue/winner.fxml"), Services.getBundle());
+            stageNewWindow.setTitle("Victoire!");
+            stageNewWindow.setScene(new Scene(mainPane, 400, 300));
+            stageNewWindow.setResizable(false);
+            stageNewWindow.initModality(Modality.APPLICATION_MODAL);
+            stageNewWindow.getScene().getStylesheets().add(getClass().getResource("../ressources/style.css").toExternalForm());
+            stageNewWindow.showAndWait();
+            AnchorPane pane = FXMLLoader.load(getClass().getResource("../vue/accueil.fxml"), Services.getBundle());
+            Services.setupFenetre(Services.WIDTH_BASE+10, Services.HEIGHT_BASE+40, currentStage);
+            mainPane.getChildren().setAll(pane);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+*/
+    }
 }
