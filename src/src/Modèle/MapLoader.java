@@ -1,5 +1,7 @@
 package Modèle;
 
+import javafx.application.Platform;
+import javafx.scene.layout.StackPane;
 import vue.grilleView;
 
 import java.util.ArrayList;
@@ -20,11 +22,11 @@ public class MapLoader implements Observer {
     8 = pacman
     9 = porte
      */
-
+    public static int cptGomme=0;
     public static final int XSIZE = 28;
     public static final int YSIZE = 31;
-    private static int[][] currentMap;
-    private static ArrayList<Affichable>[][] affichablesMap;
+    public static int[][] currentMap;
+    public static ArrayList<Affichable>[][] affichablesMap;
 //31x28
     public static final int[][] BASEMAP = {
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
@@ -56,7 +58,7 @@ public class MapLoader implements Observer {
             {1, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, 1},
             {1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1},
             {1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 1},
-            {1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1},
+            {1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1},
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
     };
 
@@ -70,7 +72,7 @@ public class MapLoader implements Observer {
     public static int getValueAt(int x, int y){
         if  (currentMap.length != BASEMAP.length)
             copyMap();
-        return currentMap[x][y];
+        return currentMap[y][x];
     }
 
     public static ArrayList<Affichable> getEntityOrItemAt(int x, int y){
@@ -89,12 +91,14 @@ public class MapLoader implements Observer {
                 switch (currentMap[i][j]){
                     case 2:
                         affichablesMap[i][j].add(new Gomme());
+                        cptGomme++;
                         break;
                     case 3:
                         affichablesMap[i][j].add(new SuperGomme());
+                        cptGomme++;
                         break;
                     case 4:
-                        affichablesMap[i][j].add(new FantomeR(j, i));
+                        affichablesMap[i][j].add(FantomeR.getInstance());
                         break;
                     case 5:
                         affichablesMap[i][j].add(new FantomeB(j, i));
@@ -106,7 +110,6 @@ public class MapLoader implements Observer {
                         affichablesMap[i][j].add(new FantomeO(j, i));
                         break;
                     case 8:
-                        System.out.println(i+ " " + j);
                         affichablesMap[i][j].add(PacMan.getInstance());
                 }
 
@@ -125,13 +128,13 @@ public class MapLoader implements Observer {
 
     }
 
-    public static void moveCase(int xStart, int yStart, int xEnd, int yEnd, Entities ent){
-        affichablesMap[xStart][yStart].remove(ent);
-        if (affichablesMap[xStart][yStart].size() != 0)
-            currentMap[xStart][yStart] = affichablesMap[xStart][xEnd].get(0).getMapCode();
-
+    public static void moveCase(int xStart, int yStart, int xEnd, int yEnd, Entities ent) {
+        affichablesMap[yStart][xStart].remove(ent);
+        if (affichablesMap[yStart][xStart].size() != 0)
+            currentMap[yStart][xStart] = affichablesMap[yStart][xStart].get(0).getMapCode();
+        Affichable affichableTemp = null;
         if (ent instanceof PacMan) {
-            for (Affichable a : affichablesMap[xEnd][yEnd]) {
+            for (Affichable a : affichablesMap[yEnd][xEnd]) {
                 if (a instanceof Fantome) {
                     GlobalGameController.gameOver();
                     return;
@@ -140,15 +143,24 @@ public class MapLoader implements Observer {
                         GlobalGameController.addScore(50);
                     else
                         GlobalGameController.addScore(10);
-                    affichablesMap[xEnd][yEnd].remove(a);
+                    cptGomme--;
+                    affichableTemp = a;
+                    Platform.runLater(()->{
+                        grilleView.miam(xEnd, yEnd);
+                    });
+                    if(cptGomme<=0){
+                        //TODO : gérer la victoire
+                    }
                 }
             }
         }
-
-        affichablesMap[xEnd][yEnd].add(ent);
-        currentMap[xEnd][yEnd] = affichablesMap[xEnd][yEnd].get(affichablesMap[xEnd][yEnd].size()-1).getMapCode();
-        System.out.println("t1");
-        grilleView.graphicMove(xStart, yStart, xEnd, yEnd);
-        System.out.println("terminé");
+        if (affichableTemp != null) {
+            affichablesMap[yEnd][xEnd].remove(affichableTemp);
+        }
+        affichablesMap[yEnd][xEnd].add(ent);
+        currentMap[yEnd][xEnd] = affichablesMap[yEnd][xEnd].get(affichablesMap[yEnd][xEnd].size() - 1).getMapCode();
+        Platform.runLater(()->{
+            grilleView.graphicMove(xStart, yStart, xEnd, yEnd, ent);
+                });
     }
 }

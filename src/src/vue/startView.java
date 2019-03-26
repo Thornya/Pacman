@@ -1,10 +1,15 @@
 package vue;
 
 import javafx.application.Application;
+import javafx.geometry.HPos;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+
 
 public class startView extends Application {
     private static AnchorPane mainPane;
@@ -51,14 +56,32 @@ public class startView extends Application {
 
         System.out.println(menu);
 
-        menu.setGridLinesVisible(true);
+       // menu.setGridLinesVisible(true);
         mainPane.getChildren().add(menu);
-        
+
         scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
 
         root.getChildren().add(mainPane);
 
+        Button playButton = new Button("Jouer");
+        Button quitButton = new Button("Quitter");
+        Label labelTitle = new Label("PacManChan");
 
+        labelTitle.setId("labelTitle");
+        playButton.setId("buttonPlay");
+        quitButton.setId("buttonQuit");
+        GridPane.setHalignment(playButton, HPos.CENTER);
+        GridPane.setHalignment(quitButton, HPos.CENTER);
+        menu.add(labelTitle, 1 ,1 );
+        menu.add(playButton, 1 ,3 );
+        menu.add(quitButton, 1 ,4 );
+
+        playButton.setOnAction(event -> {
+            grilleView.main(null);
+        });
+        quitButton.setOnAction(event -> {
+            stage.close();
+        });
         stage.setTitle("PacManChan");
         stage.setScene(scene);
         stage.sizeToScene();

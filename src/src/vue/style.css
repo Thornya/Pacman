@@ -7,3 +7,12 @@
     -fx-background-repeat: stretch;
     -fx-background-size: 560 620;
 }
+
+
+#labelTitle{
+    -fx-font-family: "Trebuchet MS";
+    -fx-font: 30px white;
+    -fx-font-style: Italic Bold;
+
+}
+

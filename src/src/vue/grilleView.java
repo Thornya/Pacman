@@ -3,10 +3,12 @@ package vue;
 import Lib.Dir;
 import Modèle.*;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
@@ -16,8 +18,7 @@ import java.io.File;
 public class grilleView extends Application {
     private static AnchorPane mainPane;
     private static BorderPane border;
-    private static GridPane grid;
-    static boolean t = false;
+    public static GridPane grid;
 
     @Override
     public void start(Stage stage) {
@@ -36,8 +37,9 @@ public class grilleView extends Application {
 
         mainPane.getChildren().add(border);
         grid = new GridPane();
-        GlobalGameController ggc = new GlobalGameController();
-        new Thread(ggc).start();
+
+        MapLoader.mapSetup();
+
         BorderPane.setAlignment(grid, Pos.CENTER);
         border.setCenter(grid);
 
@@ -79,21 +81,24 @@ public class grilleView extends Application {
         scene.setOnKeyPressed(e -> {
             switch(e.getCode()){
                 case RIGHT:
-                    PacMan.setNextPacDir(Dir.DROITE);
+                    PacMan.getInstance().setNextDir(Dir.DROITE);
                     break;
                 case LEFT:
-                    PacMan.setNextPacDir(Dir.GAUCHE);
+                    PacMan.getInstance().setNextDir(Dir.GAUCHE);
                     break;
                 case UP:
-                    PacMan.setNextPacDir(Dir.HAUT);
+                    PacMan.getInstance().setNextDir(Dir.HAUT);
                     break;
                 case DOWN:
-                    PacMan.setNextPacDir(Dir.BAS);
+                    PacMan.getInstance().setNextDir(Dir.BAS);
                     break;
             }
         });
 
         this.addPane();
+
+        GlobalGameController ggc = new GlobalGameController();
+        new Thread(ggc).start();
         stage.setTitle("PacManChan");
         stage.setScene(scene);
         stage.sizeToScene();
@@ -103,16 +108,25 @@ public class grilleView extends Application {
         stage.show();
     }
 
-    public static void main(String[] args){
-        Application.launch(args);
+    public static void graphicMove(int xStart, int yStart, int xEnd, int yEnd, Entities ent){
+
+        StackPane pane = (StackPane) grid.getChildren().get(yStart * MapLoader.XSIZE + xStart + 1);
+        StackPane pane2 = (StackPane) grid.getChildren().get(yEnd * MapLoader.XSIZE + xEnd + 1);
+        ImageView iv = null;
+        for (Node node :  pane.getChildren()){
+            iv = (ImageView) node;
+            if (iv.getStyleClass().contains(ent.getId()))
+                break;
+        }
+
+        pane.getChildren().remove(iv);
+        pane2.getChildren().add(iv);
     }
 
-    public static void graphicMove(int xStart, int yStart, int xEnd, int yEnd){
-        System.out.println("t2");
-        System.out.println(grid.getChildren());
-        System.out.println(grid.getChildren().get(yStart*MapLoader.XSIZE+xStart));
+    public static void miam(int x, int y){
+        StackPane pane = (StackPane) grid.getChildren().get(y * MapLoader.XSIZE + x + 1);
+        pane.getChildren().remove(0);
 
-        System.out.println("t3");
     }
 
     private void addPane() {
@@ -122,6 +136,14 @@ public class grilleView extends Application {
             for(int j = 0; j < MapLoader.XSIZE; j++){
                 coupPane = new StackPane();
                 switch(MapLoader.BASEMAP[i][j]){
+                    case 0:{
+                        grid.add(coupPane,j,i);
+                        break;
+                    }
+                    case 1:{
+                        grid.add(coupPane,j,i);
+                        break;
+                    }
                     case 2:{
                         Gomme gommeTemp = (Gomme)MapLoader.getEntityOrItemAt(i,j).get(0);
                         ImageView test = new ImageView(gommeTemp.getPath());
@@ -144,7 +166,9 @@ public class grilleView extends Application {
                     }
                     case 4:{
                         FantomeR fantTemp = (FantomeR)MapLoader.getEntityOrItemAt(i,j).get(0);
-                        ImageView test = new ImageView(fantTemp.getImgPaths().get(0));
+                        ImageView test = new ImageView(fantTemp.getImgPaths());
+                        test.getStyleClass().add(fantTemp.getId());
+                        test.setId(fantTemp.getId());
                         test.setFitWidth(20);
                         test.setFitHeight(20);
                         coupPane.getChildren().add(test);
@@ -154,7 +178,10 @@ public class grilleView extends Application {
                     }
                     case 5:{
                         FantomeB fantTemp = (FantomeB)MapLoader.getEntityOrItemAt(i,j).get(0);
-                        ImageView test = new ImageView(fantTemp.getImgPaths().get(0));
+                        ImageView test = new ImageView(fantTemp.getImgPaths());
+                        test.getStyleClass().add(fantTemp.getId());
+
+                        test.setId(fantTemp.getId());
                         test.setFitWidth(20);
                         test.setFitHeight(20);
                         coupPane.getChildren().add(test);
@@ -164,7 +191,10 @@ public class grilleView extends Application {
                     }
                     case 6:{
                         FantomeV fantTemp = (FantomeV)MapLoader.getEntityOrItemAt(i,j).get(0);
-                        ImageView test = new ImageView(fantTemp.getImgPaths().get(0));
+                        ImageView test = new ImageView(fantTemp.getImgPaths());
+                        test.getStyleClass().add(fantTemp.getId());
+
+                        test.setId(fantTemp.getId());
                         test.setFitWidth(20);
                         test.setFitHeight(20);
                         coupPane.getChildren().add(test);
@@ -174,7 +204,10 @@ public class grilleView extends Application {
                     }
                     case 7:{
                         FantomeO fantTemp = (FantomeO)MapLoader.getEntityOrItemAt(i,j).get(0);
-                        ImageView test = new ImageView(fantTemp.getImgPaths().get(0));
+                        ImageView test = new ImageView(fantTemp.getImgPaths());
+                        test.getStyleClass().add(fantTemp.getId());
+
+                        test.setId(fantTemp.getId());
                         test.setFitWidth(20);
                         test.setFitHeight(20);
                         coupPane.getChildren().add(test);
@@ -184,7 +217,9 @@ public class grilleView extends Application {
                     }
                     case 8:{
                         PacMan pacManTemp = (PacMan)MapLoader.getEntityOrItemAt(i,j).get(0);
-                        ImageView test = new ImageView(pacManTemp.getImgPaths().get(0));
+                        ImageView test = new ImageView(pacManTemp.getImgPaths());
+                        test.getStyleClass().add(pacManTemp.getId());
+                        test.setId(pacManTemp.getId());
                         test.setFitWidth(20);
                         test.setFitHeight(20);
                         coupPane.getChildren().add(test);
@@ -192,14 +227,26 @@ public class grilleView extends Application {
                         grid.add(coupPane,j,i);
                         break;
                     }
+                    case 9:{
+                        grid.add(coupPane,j,i);
+                        break;
+                    }
                     default:{
                         break;
                     }
                 }
-            }
+                int finalI = i;
+                int finalJ = j;
+                coupPane.setOnMouseClicked(event -> {
+                    System.out.println("i: "+finalI+" ; j: "+finalJ);
 
+                });
+            }
         }
     }
 
+    public static void main(String[] args){
+        Application.launch(args);
+    }
 
 }
