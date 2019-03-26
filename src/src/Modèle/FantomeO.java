@@ -7,6 +7,8 @@ public class FantomeO extends Fantome {
         super("file:src\\src\\ressources\\fantomeOR.png", x, y);
         setMapCode(7);
         setId("O");
+        setxInitPos(x);
+        setyInitPos(y);
     }
 
     public static FantomeO getInstance() {

@@ -3,10 +3,13 @@ import Lib.Dir;
 
 public abstract class Entities implements Affichable, Movable{
 
-    private String imgPaths = new String();
+    private String imgPath = new String();
     private int mapCode;
     private int xPos;
     private int yPos;
+    private int xInitPos;
+    private int yInitPos;
+
     private State state = State.NORMAL;
     private boolean hasMoved = false;
 
@@ -18,7 +21,7 @@ public abstract class Entities implements Affichable, Movable{
 
 
     public Entities(String imgPath, int xPos, int yPos) {
-        this.imgPaths = imgPath;
+        this.imgPath = imgPath;
         this.xPos = xPos;
         this.yPos = yPos;
     }
@@ -122,8 +125,8 @@ public abstract class Entities implements Affichable, Movable{
         hasMoved = true;
     }
 
-    public String getImgPaths() {
-        return imgPaths;
+    public String getImgPath() {
+        return imgPath;
     }
     public int getxPos() {
         return xPos;
@@ -161,5 +164,9 @@ public abstract class Entities implements Affichable, Movable{
     public void setId(String id) {
         this.id = id;
     }
-
+    public State getState(){return state;}
+    public int getxInitPos() {return xInitPos; }
+    public void setxInitPos(int xInitPos) {this.xInitPos = xInitPos;}
+    public int getyInitPos() {return yInitPos;}
+    public void setyInitPos(int yInitPos) {this.yInitPos = yInitPos;    }
 }

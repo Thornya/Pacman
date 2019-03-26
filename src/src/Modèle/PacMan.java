@@ -10,6 +10,8 @@ public class PacMan extends Entities{
         setMapCode(8);
         setId("P");
         this.setNextDir(Dir.GAUCHE);
+        setxInitPos(x);
+        setyInitPos(y);
     }
 
     public static PacMan getInstance() {

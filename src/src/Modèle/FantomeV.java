@@ -7,6 +7,8 @@ public class FantomeV extends Fantome {
         super("file:src\\src\\ressources\\fantomeVR.png", x, y);
         setMapCode(6);
         setId("V");
+        setxInitPos(x);
+        setyInitPos(y);
     }
 
     public static FantomeV getInstance() {
