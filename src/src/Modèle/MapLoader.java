@@ -1,7 +1,6 @@
 package Modèle;
 
 import javafx.application.Platform;
-import javafx.scene.layout.StackPane;
 import vue.grilleView;
 
 import java.util.ArrayList;
@@ -151,6 +150,8 @@ public class MapLoader implements Observer {
                     });
                     if(cptGomme<=0){
                         //TODO : gérer la victoire
+                        System.out.println("game over");
+                        GlobalGameController.gameOver();
                     }
                 }
             }
