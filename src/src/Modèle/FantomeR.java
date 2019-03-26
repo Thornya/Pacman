@@ -8,6 +8,8 @@ public class FantomeR extends Fantome {
         super("file:src\\src\\ressources\\fantomeRR.png", x, y);
         setMapCode(4);
         setId("R");
+        setxInitPos(x);
+        setyInitPos(y);
     }
 
 
