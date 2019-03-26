@@ -2,11 +2,14 @@ package vue;
 
 import Lib.Dir;
 import Modèle.*;
+import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Modality;
@@ -19,8 +22,8 @@ public class grilleView {
     private static AnchorPane mainPane;
 
 
-    public static void setupGrilleView(AnchorPane mainPane) {
-        grilleView.mainPane = mainPane;
+    public static void setupGrilleView(AnchorPane mainPanePara) {
+        grilleView.mainPane = mainPanePara;
         mainPane.getChildren().clear();
         Stage stage = (Stage) mainPane.getScene().getWindow();
         Group root = new Group();
@@ -56,13 +59,12 @@ public class grilleView {
         stage.setY(((screenBounds.getHeight() - stage.getHeight()) / 4));
 
         root.getChildren().add(mainPane);
-        double size = ((100/5) - (40/5));
-        //c buggé fo dépasé
+        double sizeCase = (12);
         ColumnConstraints columnConstraint = new ColumnConstraints();
-        columnConstraint.setPercentWidth(size);
+        columnConstraint.setPercentWidth(sizeCase);
         columnConstraint.setMaxWidth(Double.MAX_VALUE);
         RowConstraints rowConstraint = new RowConstraints();
-        rowConstraint.setPercentHeight(size);
+        rowConstraint.setPercentHeight(sizeCase);
         rowConstraint.setMaxHeight(Double.MAX_VALUE);
 
         //Génération de la grille 31x28
@@ -108,6 +110,8 @@ public class grilleView {
         StackPane pane = (StackPane) grid.getChildren().get(yStart * MapLoader.XSIZE + xStart + 1);
         StackPane pane2 = (StackPane) grid.getChildren().get(yEnd * MapLoader.XSIZE + xEnd + 1);
         ImageView iv = null;
+        System.out.println(xStart + " - >" + xEnd);
+        System.out.println(yStart+ " -> " + yEnd);
         for (Node node :  pane.getChildren()){
             iv = (ImageView) node;
             if (iv.getStyleClass().contains(ent.getId()))
@@ -115,13 +119,13 @@ public class grilleView {
         }
 
         pane.getChildren().remove(iv);
+        System.out.println("ent: "+ent + "    iv: "+iv);
         pane2.getChildren().add(iv);
     }
 
     public static void miam(int x, int y){
         StackPane pane = (StackPane) grid.getChildren().get(y * MapLoader.XSIZE + x + 1);
         pane.getChildren().remove(0);
-
     }
 
     private static void setupGrilleGraphique() {
@@ -184,10 +188,7 @@ public class grilleView {
                 }
                 int finalI = i;
                 int finalJ = j;
-                coupPane.setOnMouseClicked(event -> {
-                    System.out.println("i: "+finalI+" ; j: "+finalJ);
-
-                });
+                coupPane.setOnMouseClicked(event -> System.out.println("i: "+finalI+" ; j: "+finalJ));
             }
         }
     }
@@ -202,23 +203,60 @@ public class grilleView {
     }
 
 
-    private void popUpWinner() {/*
+    public static void popupGameOver(int score) {
+
         Stage stageNewWindow = new Stage();
         Stage currentStage = (Stage) mainPane.getScene().getWindow();
-        try {
-            AnchorPane root = FXMLLoader.load(getClass().getResource("../vue/winner.fxml"), Services.getBundle());
-            stageNewWindow.setTitle("Victoire!");
-            stageNewWindow.setScene(new Scene(mainPane, 400, 300));
-            stageNewWindow.setResizable(false);
-            stageNewWindow.initModality(Modality.APPLICATION_MODAL);
-            stageNewWindow.getScene().getStylesheets().add(getClass().getResource("../ressources/style.css").toExternalForm());
-            stageNewWindow.showAndWait();
-            AnchorPane pane = FXMLLoader.load(getClass().getResource("../vue/accueil.fxml"), Services.getBundle());
-            Services.setupFenetre(Services.WIDTH_BASE+10, Services.HEIGHT_BASE+40, currentStage);
-            mainPane.getChildren().setAll(pane);
-        } catch (IOException e) {
-            e.printStackTrace();
+        Group root = new Group();
+        Scene scene = new Scene(root);
+
+        AnchorPane mainPanePopUp = new AnchorPane();
+        mainPanePopUp.setMinSize(200, 150);
+        mainPanePopUp.setMaxSize(200, 150);
+        mainPanePopUp.setPrefSize(200, 150);
+        GridPane popUpGameOver = new GridPane();
+        popUpGameOver.setMinSize(200, 150);
+        popUpGameOver.setMaxSize(200, 150);
+        popUpGameOver.setPrefSize(200, 150);
+
+        ColumnConstraints columnConst = new ColumnConstraints();
+        columnConst.setPercentWidth(10);
+        columnConst.setMaxWidth(Double.MAX_VALUE);
+
+        ColumnConstraints columnConst2 = new ColumnConstraints();
+        columnConst2.setPercentWidth(80);
+        columnConst2.setMaxWidth(Double.MAX_VALUE);
+
+        RowConstraints rowConstraint = new RowConstraints();
+        rowConstraint.setPercentHeight(50);
+        rowConstraint.setMaxHeight(Double.MAX_VALUE);
+
+        startView.setupMenuColonnes(popUpGameOver, columnConst, columnConst2);
+
+        for(int i = 0; i<2; i++){
+            popUpGameOver.addRow(i);
+            popUpGameOver.getRowConstraints().add(rowConstraint);
         }
-*/
+        mainPanePopUp.getChildren().add(popUpGameOver);
+        root.getChildren().add(mainPanePopUp);
+
+        Button okButton = new Button("Quitter");
+        Label labelScore = new Label("Score :" + score);
+
+        GridPane.setHalignment(labelScore, HPos.CENTER);
+        GridPane.setHalignment(okButton, HPos.CENTER);
+        popUpGameOver.add(labelScore, 1 ,0 );
+        popUpGameOver.add(okButton, 1 ,1 );
+
+        okButton.setOnAction(event -> stageNewWindow.close());
+        stageNewWindow.setScene(scene);
+        stageNewWindow.sizeToScene();
+        stageNewWindow.setTitle("Partie terminée!");
+        stageNewWindow.setResizable(false);
+        stageNewWindow.initModality(Modality.APPLICATION_MODAL);
+        stageNewWindow.showAndWait();
+        currentStage.close();
+
+
     }
 }
