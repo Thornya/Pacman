@@ -2,7 +2,6 @@ package vue;
 
 import javafx.application.Application;
 import javafx.geometry.HPos;
-import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -13,8 +12,6 @@ import javafx.stage.Stage;
 
 public class startView extends Application {
     private static AnchorPane mainPane;
-    private static BorderPane border;
-    
 
     @Override
     public void start(Stage stage) {
@@ -77,7 +74,7 @@ public class startView extends Application {
         menu.add(quitButton, 1 ,4 );
 
         playButton.setOnAction(event -> {
-            grilleView.main(null);
+            grilleView.setupGrilleView(mainPane);
         });
         quitButton.setOnAction(event -> {
             stage.close();

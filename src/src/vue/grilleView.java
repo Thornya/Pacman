@@ -2,27 +2,27 @@ package vue;
 
 import Lib.Dir;
 import Modèle.*;
-import javafx.application.Application;
-import javafx.application.Platform;
 import javafx.geometry.Pos;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.File;
 
-public class grilleView extends Application {
+public class grilleView {
     private static AnchorPane mainPane;
     private static BorderPane border;
     public static GridPane grid;
 
-    @Override
-    public void start(Stage stage) {
 
+    public static void setupGrilleView(AnchorPane mainPane) {
+        mainPane.getChildren().clear();
+        Stage stage = (Stage) mainPane.getScene().getWindow();
         Group root = new Group();
         Scene scene = new Scene(root);
 
@@ -46,9 +46,16 @@ public class grilleView extends Application {
         grid.setPrefSize(560, 620);
         grid.setMaxSize(560, 620);
         grid.setMinSize(560, 620);
-        scene.getStylesheets().addAll(this.getClass().getResource("style.css").toExternalForm());
         grid.setId("mainGrid");
         mainPane.setId("mainPane");
+        scene.getStylesheets().add("vue/style.css");
+
+
+        //Recentrer la fenêtre lors du changement de taille
+        Rectangle2D screenBounds = Screen.getPrimary().getVisualBounds();
+        stage.setX((screenBounds.getWidth() - stage.getWidth()) / 2.5);
+        stage.setY(((screenBounds.getHeight() - stage.getHeight()) / 4));
+
 
         root.getChildren().add(mainPane);
         double size = ((100/5) - (40/5));
@@ -60,11 +67,11 @@ public class grilleView extends Application {
         rowConstraint.setPercentHeight(size);
         rowConstraint.setMaxHeight(Double.MAX_VALUE);
 
+        //Génération de la grille 31x28
         for(int i = 0; i< MapLoader.YSIZE; i++){
             grid.addRow(i);
             grid.getRowConstraints().add(rowConstraint);
         }
-
         for(int i = 0; i<MapLoader.XSIZE; i++){
             grid.addColumn(i);
             grid.getColumnConstraints().add(columnConstraint);
@@ -73,10 +80,7 @@ public class grilleView extends Application {
 
 
         grid.setGridLinesVisible(true);
-        File f = new File("src\\src\\ressources\\52631.png");
-        if(f.exists() && !f.isDirectory()) {
-            // do something
-        }
+
 
         scene.setOnKeyPressed(e -> {
             switch(e.getCode()){
@@ -95,7 +99,7 @@ public class grilleView extends Application {
             }
         });
 
-        this.addPane();
+        setupGrilleGraphique();
 
         GlobalGameController ggc = new GlobalGameController();
         new Thread(ggc).start();
@@ -129,7 +133,7 @@ public class grilleView extends Application {
 
     }
 
-    private void addPane() {
+    private static void setupGrilleGraphique() {
         StackPane coupPane;
 
         for(int i = 0; i < MapLoader.YSIZE; i++){
@@ -146,85 +150,37 @@ public class grilleView extends Application {
                     }
                     case 2:{
                         Gomme gommeTemp = (Gomme)MapLoader.getEntityOrItemAt(i,j).get(0);
-                        ImageView test = new ImageView(gommeTemp.getPath());
-                        test.setFitWidth(20);
-                        test.setFitHeight(20);
-                        coupPane.getChildren().add(test);
-                        StackPane.setAlignment(coupPane.getChildren().get(0), Pos.CENTER);
-                        grid.add(coupPane,j,i);
+                        setupImageView(coupPane, gommeTemp.getPath(), i, j);
                         break;
                     }
                     case 3:{
                         SuperGomme sGommeTemp = (SuperGomme)MapLoader.getEntityOrItemAt(i,j).get(0);
-                        ImageView test = new ImageView(sGommeTemp.getPath());
-                        test.setFitWidth(20);
-                        test.setFitHeight(20);
-                        coupPane.getChildren().add(test);
-                        StackPane.setAlignment(coupPane.getChildren().get(0), Pos.CENTER);
-                        grid.add(coupPane,j,i);
+                        setupImageView(coupPane, sGommeTemp.getPath(), i, j);
                         break;
                     }
                     case 4:{
                         FantomeR fantTemp = (FantomeR)MapLoader.getEntityOrItemAt(i,j).get(0);
-                        ImageView test = new ImageView(fantTemp.getImgPaths());
-                        test.getStyleClass().add(fantTemp.getId());
-                        test.setId(fantTemp.getId());
-                        test.setFitWidth(20);
-                        test.setFitHeight(20);
-                        coupPane.getChildren().add(test);
-                        StackPane.setAlignment(coupPane.getChildren().get(0), Pos.CENTER);
-                        grid.add(coupPane,j,i);
+                       // setupImageView(coupPane, fantTemp.getPath(), i, j);
                         break;
                     }
                     case 5:{
                         FantomeB fantTemp = (FantomeB)MapLoader.getEntityOrItemAt(i,j).get(0);
-                        ImageView test = new ImageView(fantTemp.getImgPaths());
-                        test.getStyleClass().add(fantTemp.getId());
-
-                        test.setId(fantTemp.getId());
-                        test.setFitWidth(20);
-                        test.setFitHeight(20);
-                        coupPane.getChildren().add(test);
-                        StackPane.setAlignment(coupPane.getChildren().get(0), Pos.CENTER);
-                        grid.add(coupPane,j,i);
+                        //setupImageView(coupPane, fantTemp.getPath(), i, j);
                         break;
                     }
                     case 6:{
                         FantomeV fantTemp = (FantomeV)MapLoader.getEntityOrItemAt(i,j).get(0);
-                        ImageView test = new ImageView(fantTemp.getImgPaths());
-                        test.getStyleClass().add(fantTemp.getId());
-
-                        test.setId(fantTemp.getId());
-                        test.setFitWidth(20);
-                        test.setFitHeight(20);
-                        coupPane.getChildren().add(test);
-                        StackPane.setAlignment(coupPane.getChildren().get(0), Pos.CENTER);
-                        grid.add(coupPane,j,i);
+                        //setupImageView(coupPane, fantTemp.getPath(), i, j);
                         break;
                     }
                     case 7:{
                         FantomeO fantTemp = (FantomeO)MapLoader.getEntityOrItemAt(i,j).get(0);
-                        ImageView test = new ImageView(fantTemp.getImgPaths());
-                        test.getStyleClass().add(fantTemp.getId());
-
-                        test.setId(fantTemp.getId());
-                        test.setFitWidth(20);
-                        test.setFitHeight(20);
-                        coupPane.getChildren().add(test);
-                        StackPane.setAlignment(coupPane.getChildren().get(0), Pos.CENTER);
-                        grid.add(coupPane,j,i);
+                        //setupImageView(coupPane, fantTemp.getPath(), i, j);
                         break;
                     }
                     case 8:{
                         PacMan pacManTemp = (PacMan)MapLoader.getEntityOrItemAt(i,j).get(0);
-                        ImageView test = new ImageView(pacManTemp.getImgPaths());
-                        test.getStyleClass().add(pacManTemp.getId());
-                        test.setId(pacManTemp.getId());
-                        test.setFitWidth(20);
-                        test.setFitHeight(20);
-                        coupPane.getChildren().add(test);
-                        StackPane.setAlignment(coupPane.getChildren().get(0), Pos.CENTER);
-                        grid.add(coupPane,j,i);
+                        //setupImageView(coupPane, pacManTemp.getPath(), i, j);
                         break;
                     }
                     case 9:{
@@ -245,8 +201,13 @@ public class grilleView extends Application {
         }
     }
 
-    public static void main(String[] args){
-        Application.launch(args);
+    private static void setupImageView(StackPane sp, String path, int i, int j){
+        ImageView test = new ImageView(path);
+        test.setFitWidth(20);
+        test.setFitHeight(20);
+        sp.getChildren().add(test);
+        StackPane.setAlignment(sp.getChildren().get(0), Pos.CENTER);
+        grid.add(sp,j,i);
     }
 
 }
