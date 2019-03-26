@@ -23,5 +23,12 @@ public class PacMan extends Entities{
 
     }
 
+    public void mangerSGomme(){
+        this.state = State.SUPERPACMAN;
+        FantomeR.getInstance().state = State.SCARED;
+        FantomeB.getInstance().state = State.SCARED;
+        FantomeV.getInstance().state = State.SCARED;
+        FantomeO.getInstance().state = State.SCARED;
+    }
 
 }
