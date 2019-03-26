@@ -22,6 +22,7 @@ public class MapLoader implements Observer {
     8 = pacman
     9 = porte
      */
+
     public static int cptGomme=0;
     public static final int XSIZE = 28;
     public static final int YSIZE = 31;

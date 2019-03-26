@@ -3,7 +3,7 @@ import Lib.Dir;
 
 public abstract class Entities implements Affichable, Movable{
 
-    private String imgPath = new String();
+    private String imgPath;
     private int mapCode;
     private int xPos;
     private int yPos;

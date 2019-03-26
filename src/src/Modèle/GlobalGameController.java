@@ -11,7 +11,6 @@ public class GlobalGameController extends Observable implements Runnable {
     }
 
 
-
     @Override
     public void run() {
 
