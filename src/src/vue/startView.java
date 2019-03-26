@@ -39,19 +39,12 @@ public class startView extends Application {
         rowConstraint.setPercentHeight(20);
         rowConstraint.setMaxHeight(Double.MAX_VALUE);
 
-        menu.addColumn(0);
-        menu.getColumnConstraints().add(columnConstraint);
-        menu.addColumn(1);
-        menu.getColumnConstraints().add(columnConstraint2);
-        menu.addColumn(2);
-        menu.getColumnConstraints().add(columnConstraint);
+        setupMenuColonnes(menu, columnConstraint, columnConstraint2);
 
         for(int i = 0; i<6; i++){
             menu.addRow(i);
             menu.getRowConstraints().add(rowConstraint);
         }
-
-        System.out.println(menu);
 
         mainPane.getChildren().add(menu);
 
@@ -64,8 +57,6 @@ public class startView extends Application {
         Label labelTitle = new Label("PacManChan");
 
         labelTitle.setId("labelTitle");
-        playButton.setId("buttonPlay");
-        quitButton.setId("buttonQuit");
         GridPane.setHalignment(playButton, HPos.CENTER);
         GridPane.setHalignment(quitButton, HPos.CENTER);
         menu.add(labelTitle, 1 ,1 );
@@ -84,4 +75,14 @@ public class startView extends Application {
     public static void main(String[] args){
         Application.launch(args);
     }
+    public static void setupMenuColonnes(GridPane gp, ColumnConstraints c1, ColumnConstraints c2){
+        gp.addColumn(0);
+        gp.getColumnConstraints().add(c1);
+        gp.addColumn(1);
+        gp.getColumnConstraints().add(c2);
+        gp.addColumn(2);
+        gp.getColumnConstraints().add(c1);
+
+    }
+
 }
