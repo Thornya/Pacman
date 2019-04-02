@@ -1,7 +1,5 @@
 package Modèle;
 
-import Lib.Dir;
-
 import java.util.Random;
 
 public class Fantome extends Entities implements Affichable{

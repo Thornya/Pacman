@@ -1,4 +1,4 @@
-package Lib;
+package Modèle;
 
 public enum Dir {
     HAUT,

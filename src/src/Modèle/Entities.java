@@ -1,5 +1,4 @@
 package Modèle;
-import Lib.Dir;
 
 public abstract class Entities implements Affichable, Movable{
 

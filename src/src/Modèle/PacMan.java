@@ -1,7 +1,5 @@
 package Modèle;
 
-import Lib.Dir;
-
 public class PacMan extends Entities{
     private static PacMan thePacMan = new PacMan(13,23);
 
@@ -23,22 +21,21 @@ public class PacMan extends Entities{
 
     }
 
-    public void mangerSGomme(){
-<<<<<<< HEAD
-        this.state = State.SUPERPACMAN;
-=======
+    public void mangerSGomme() {
         state = State.SUPERPACMAN;
->>>>>>> master
         FantomeR.getInstance().state = State.SCARED;
         FantomeB.getInstance().state = State.SCARED;
         FantomeV.getInstance().state = State.SCARED;
         FantomeO.getInstance().state = State.SCARED;
-<<<<<<< HEAD
-    }
-=======
-
+        GlobalGameController.superTime = 50;
     }
 
->>>>>>> master
+    public void stopSGomme(){
+        state = State.NORMAL;
+        FantomeR.getInstance().state = State.NORMAL;
+        FantomeB.getInstance().state = State.NORMAL;
+        FantomeV.getInstance().state = State.NORMAL;
+        FantomeO.getInstance().state = State.NORMAL;
+    }
 
 }

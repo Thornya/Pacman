@@ -1,6 +1,6 @@
 package vue;
 
-import Lib.Dir;
+import Modèle.Dir;
 import Modèle.*;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
@@ -20,6 +20,8 @@ public class grilleView {
     private static BorderPane border;
     public static GridPane grid;
     private static AnchorPane mainPane;
+    private static Label superTime, score;
+    private static ImageView ivPacman;
 
 
     public static void setupGrilleView(AnchorPane mainPanePara) {
@@ -38,13 +40,21 @@ public class grilleView {
         border.setMaxSize(580, 750);
         border.setPrefSize(580, 750);
 
+        score = new Label("");
+        superTime = new Label("");
         mainPane.getChildren().add(border);
         grid = new GridPane();
 
         MapLoader.mapSetup();
-
+        score.setStyle("-fx-background: white");
+        superTime.setStyle("-fx-background: white");
         BorderPane.setAlignment(grid, Pos.CENTER);
+        BorderPane.setAlignment(score, Pos.CENTER);
+        BorderPane.setAlignment(superTime, Pos.CENTER);
+
         border.setCenter(grid);
+        border.setTop(score);
+        border.setBottom(superTime);
 
         grid.setPrefSize(560, 620);
         grid.setMaxSize(560, 620);
@@ -110,17 +120,16 @@ public class grilleView {
         StackPane pane = (StackPane) grid.getChildren().get(yStart * MapLoader.XSIZE + xStart + 1);
         StackPane pane2 = (StackPane) grid.getChildren().get(yEnd * MapLoader.XSIZE + xEnd + 1);
         ImageView iv = null;
-        System.out.println(xStart + " - >" + xEnd);
-        System.out.println(yStart+ " -> " + yEnd);
         for (Node node :  pane.getChildren()){
             iv = (ImageView) node;
             if (iv.getStyleClass().contains(ent.getId()))
                 break;
         }
 
-        pane.getChildren().remove(iv);
-        System.out.println("ent: "+ent + "    iv: "+iv);
-        pane2.getChildren().add(iv);
+        if(iv!=null){
+            pane.getChildren().remove(iv);
+            pane2.getChildren().add(iv);
+        }
     }
 
     public static void miam(int x, int y){
@@ -176,6 +185,7 @@ public class grilleView {
                     case 8:{
                         PacMan pacManTemp = (PacMan)MapLoader.getEntityOrItemAt(i,j).get(0);
                         setupImageView(coupPane, pacManTemp.getImgPath(), i, j);
+                        ivPacman = (ImageView) coupPane.getChildren().get(0);
                         break;
                     }
                     case 9:{
@@ -241,7 +251,7 @@ public class grilleView {
         root.getChildren().add(mainPanePopUp);
 
         Button okButton = new Button("Quitter");
-        Label labelScore = new Label("Score :" + score);
+        Label labelScore = new Label("Score: " + score+"!");
 
         GridPane.setHalignment(labelScore, HPos.CENTER);
         GridPane.setHalignment(okButton, HPos.CENTER);
@@ -258,5 +268,20 @@ public class grilleView {
         currentStage.close();
 
 
+    }
+
+    public static void setScore(int scoreToSet){
+        score.setText(String.valueOf(scoreToSet));
+    }
+
+    public static void setTemps(String timeToSet){
+        if (timeToSet != "-1")
+            superTime.setText(timeToSet);
+        else
+            superTime.setText(timeToSet);
+    }
+
+    public static void pacManRotate(double i){
+        ivPacman.setRotate(i);
     }
 }

@@ -10,12 +10,11 @@ import java.util.concurrent.TimeUnit;
 
 public class GlobalGameController extends Observable implements Runnable {
     private static int score = 0;
+    public static int superTime = -1;
     private static ScheduledExecutorService executor;
     public static void gameOver() {
         executor.shutdown();
         Platform.runLater(() -> grilleView.popupGameOver(score));
-        System.out.println("t0");
-
 
     }
 
@@ -33,7 +32,30 @@ public class GlobalGameController extends Observable implements Runnable {
             FantomeV.getInstance().move();
             FantomeO.getInstance().setRandomDir();
             FantomeO.getInstance().move();
-            System.out.println("Score: " + getScore());
+            Platform.runLater(()-> grilleView.setScore(score));
+            switch(superTime){
+                case -1: {
+                    Platform.runLater(()->
+                            grilleView.setTemps("Temps terminé ! Attention ! "));
+                    break;
+                }
+                case 0: {
+                    PacMan.getInstance().stopSGomme();
+                    superTime = -1;
+                    System.out.println("Temps terminé ! Attention ! ");
+                    Platform.runLater(()->
+                            grilleView.setTemps("Temps terminé ! Attention ! "));
+                    break;
+                }
+                default:{
+                    superTime--;
+                    System.out.println("Temps restant : " + superTime);
+                    Platform.runLater(()->
+                            grilleView.setTemps(String.valueOf(superTime)));
+                    break;
+                }
+            }
+
         };
         executor = Executors.newScheduledThreadPool(1);
         executor.scheduleAtFixedRate(movement, 1000, 500, TimeUnit.MILLISECONDS);

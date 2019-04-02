@@ -167,15 +167,12 @@ public class MapLoader implements Observer {
         }
         else {
             for (Affichable a : affichablesMap[yEnd][xEnd]) {
-                System.out.println(a);
                 if (a instanceof PacMan) {
-                    System.out.println("est passé la ////////////////");
                     if (ent.getState() == State.NORMAL) {
                         GlobalGameController.gameOver();
                         return;
                     } else {
                         //manger fantome
-                        System.out.println("ici -----------------------  " + ent);
                         affichableTemp.add(ent);
                         hasBeenEaten = true;
 
