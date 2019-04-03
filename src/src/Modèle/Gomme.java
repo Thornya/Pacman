@@ -2,9 +2,8 @@ package Modèle;
 
 public class Gomme extends Items {
 
-    public Gomme() {
+    Gomme() {
         super("file:src\\src\\ressources\\gomme.png");
         setMapCode(2);
     }
-
 }

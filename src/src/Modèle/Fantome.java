@@ -2,14 +2,14 @@ package Modèle;
 
 import java.util.Random;
 
-public class Fantome extends Entities implements Affichable{
+class Fantome extends Entity implements Affichable{
 
     private int lastDir = -2;
-    public Fantome(String imgPath, int xPos, int yPos) {
+    Fantome(String imgPath, int xPos, int yPos) {
         super(imgPath, xPos, yPos);
     }
 
-    public void setRandomDir(){
+    void setRandomDir(){
         Random rand = new Random();
         int nombreAleatoire;
         //genère un random jusqu'à changer de direction
@@ -17,7 +17,6 @@ public class Fantome extends Entities implements Affichable{
         while((nombreAleatoire == 0 || nombreAleatoire == (lastDir*-1)))
             nombreAleatoire = rand.nextInt(5)-2;
         switch (nombreAleatoire){
-            case 0: break;
             case 2:{
                 setNextDir(Dir.BAS);
                 lastDir = 2;
@@ -40,11 +39,4 @@ public class Fantome extends Entities implements Affichable{
             }
         }
     }
-
-    @Override
-    public void afficher() {
-
-    }
-
-
 }

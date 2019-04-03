@@ -23,11 +23,11 @@ public class MapLoader implements Observer {
     9 = porte
      */
 
-    public static int cptGomme=0;
+    private static int cptGomme=0;
     public static final int XSIZE = 28;
     public static final int YSIZE = 31;
-    public static int[][] currentMap;
-    public static ArrayList<Affichable>[][] affichablesMap;
+    private static int[][] currentMap;
+    private static ArrayList<Affichable>[][] affichablesMap;
 //31x28
     public static final int[][] BASEMAP = {
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
@@ -65,12 +65,10 @@ public class MapLoader implements Observer {
 
     private static void copyMap(){
         for (int i = 0; i<YSIZE; i++)
-            for (int j = 0; j<XSIZE; j++) {
-                currentMap[i][j] = BASEMAP[i][j];
-            }
+            System.arraycopy(BASEMAP[i], 0, currentMap[i], 0, XSIZE);
     }
 
-    public static int getValueAt(int x, int y){
+    static int getValueAt(int x, int y){
         if  (currentMap.length != BASEMAP.length)
             copyMap();
         return currentMap[y][x];
@@ -80,15 +78,11 @@ public class MapLoader implements Observer {
         return affichablesMap[x][y];
     }
 
-    public boolean isEntityOrItemAt(int x, int y){
-        return (currentMap[x][y] != 0 && currentMap[x][y] != 1 && currentMap[x][y] != 9);
-    }
-
     private static void affichablesMapFill(){
         affichablesMap = new ArrayList[YSIZE][XSIZE];
         for (int i = 0; i<YSIZE; i++)
             for (int j = 0; j<XSIZE; j++){
-                affichablesMap[i][j] = new ArrayList<Affichable>();
+                affichablesMap[i][j] = new ArrayList<>();
                 switch (currentMap[i][j]){
                     case 2:
                         affichablesMap[i][j].add(new Gomme());
@@ -129,7 +123,7 @@ public class MapLoader implements Observer {
 
     }
 
-    public static void moveCase(int xStart, int yStart, int xEnd, int yEnd, Entities ent) {
+    static void moveCase(int xStart, int yStart, int xEnd, int yEnd, Entity ent) {
         boolean hasBeenEaten = false;
         affichablesMap[yStart][xStart].remove(ent);
         if (affichablesMap[yStart][xStart].size() != 0)
@@ -155,9 +149,7 @@ public class MapLoader implements Observer {
                         GlobalGameController.addScore(10);
                     cptGomme--;
                     affichableTemp.add(a);
-                    Platform.runLater(()->{
-                        grilleView.miam(xEnd, yEnd);
-                    });
+                    Platform.runLater(()-> grilleView.miam(xEnd, yEnd));
                     if(cptGomme<=0){
                         System.out.println("game over");
                         GlobalGameController.gameOver();
@@ -184,9 +176,9 @@ public class MapLoader implements Observer {
         for(Affichable affDel : affichableTemp){
             if(affDel instanceof Fantome){
                 if (hasBeenEaten)
-                    moveCase(xStart,yStart,((Fantome) affDel).getxInitPos(),((Fantome) affDel).getyInitPos(),(Entities) affDel);
+                    moveCase(xStart,yStart,((Fantome) affDel).getxInitPos(),((Fantome) affDel).getyInitPos(),(Entity) affDel);
                 else
-                    moveCase(xEnd,yEnd,((Fantome) affDel).getxInitPos(),((Fantome) affDel).getyInitPos(),(Entities) affDel);
+                    moveCase(xEnd,yEnd,((Fantome) affDel).getxInitPos(),((Fantome) affDel).getyInitPos(),(Entity) affDel);
                 ((Fantome) affDel).setxPos(((Fantome) affDel).getxInitPos());
                 ((Fantome) affDel).setyPos(((Fantome) affDel).getyInitPos());
             }
@@ -196,7 +188,9 @@ public class MapLoader implements Observer {
         if (!hasBeenEaten) {
             affichablesMap[yEnd][xEnd].add(ent);
             currentMap[yEnd][xEnd] = affichablesMap[yEnd][xEnd].get(affichablesMap[yEnd][xEnd].size() - 1).getMapCode();
-            Platform.runLater(() -> grilleView.graphicMove(xStart, yStart, xEnd, yEnd, ent));
+            Platform.runLater(() ->
+                    GlobalGameController.setupGraphMove(xStart, yStart, xEnd, yEnd, ent)
+            );
         }
     }
 }

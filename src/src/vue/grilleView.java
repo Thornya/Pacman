@@ -16,15 +16,16 @@ import javafx.stage.Modality;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 
-public class grilleView {
-    private static BorderPane border;
-    public static GridPane grid;
+import java.util.Observable;
+import java.util.Observer;
+
+public class grilleView implements Observer {
+    private static GridPane grid;
     private static AnchorPane mainPane;
     private static Label superTime, score;
-    private static ImageView ivPacman;
 
-
-    public static void setupGrilleView(AnchorPane mainPanePara) {
+    static void setupGrilleView(AnchorPane mainPanePara) {
+        grilleView instance = new grilleView();
         grilleView.mainPane = mainPanePara;
         mainPane.getChildren().clear();
         Stage stage = (Stage) mainPane.getScene().getWindow();
@@ -35,7 +36,7 @@ public class grilleView {
         mainPane.setMinSize(580, 750);
         mainPane.setMaxSize(580, 750);
         mainPane.setPrefSize(580, 750);
-        border = new BorderPane();
+        BorderPane border = new BorderPane();
         border.setMinSize(580, 750);
         border.setMaxSize(580, 750);
         border.setPrefSize(580, 750);
@@ -109,13 +110,15 @@ public class grilleView {
         setupGrilleGraphique();
 
         GlobalGameController ggc = new GlobalGameController();
+        ggc.addObserver(instance);
         new Thread(ggc).start();
+
         stage.setTitle("PacManChan");
         stage.setScene(scene);
         stage.sizeToScene();
     }
 
-    public static void graphicMove(int xStart, int yStart, int xEnd, int yEnd, Entities ent){
+    private static void graphicMove(int xStart, int yStart, int xEnd, int yEnd, Entity ent){
 
         StackPane pane = (StackPane) grid.getChildren().get(yStart * MapLoader.XSIZE + xStart + 1);
         StackPane pane2 = (StackPane) grid.getChildren().get(yEnd * MapLoader.XSIZE + xEnd + 1);
@@ -185,7 +188,6 @@ public class grilleView {
                     case 8:{
                         PacMan pacManTemp = (PacMan)MapLoader.getEntityOrItemAt(i,j).get(0);
                         setupImageView(coupPane, pacManTemp.getImgPath(), i, j);
-                        ivPacman = (ImageView) coupPane.getChildren().get(0);
                         break;
                     }
                     case 9:{
@@ -275,13 +277,15 @@ public class grilleView {
     }
 
     public static void setTemps(String timeToSet){
-        if (timeToSet != "-1")
+        if (!timeToSet.equals("-1"))
             superTime.setText(timeToSet);
         else
             superTime.setText(timeToSet);
     }
 
-    public static void pacManRotate(double i){
-        ivPacman.setRotate(i);
+
+    @Override
+    public void update(Observable o, Object arg) {
+        graphicMove(GlobalGameController.getxStart(), GlobalGameController.getyStart(), GlobalGameController.getxEnd(), GlobalGameController.getyEnd(), GlobalGameController.getEntitytoMove());
     }
 }

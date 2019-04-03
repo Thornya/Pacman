@@ -13,7 +13,7 @@ public class FantomeR extends Fantome {
     }
 
 
-    public static FantomeR getInstance() {
+    static FantomeR getInstance() {
         return theRFantome;
     }
 

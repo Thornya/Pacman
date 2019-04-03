@@ -1,6 +1,6 @@
 package Modèle;
 
-public abstract class Entities implements Affichable, Movable{
+public abstract class Entity implements Affichable, Movable{
 
     private String imgPath;
     private int mapCode;
@@ -9,7 +9,7 @@ public abstract class Entities implements Affichable, Movable{
     private int xInitPos;
     private int yInitPos;
 
-    protected State state = State.NORMAL;
+    State state = State.NORMAL;
     private boolean hasMoved = false;
 
     private String id;
@@ -19,15 +19,11 @@ public abstract class Entities implements Affichable, Movable{
     private Dir nextDir = null;
 
 
-    public Entities(String imgPath, int xPos, int yPos) {
+    Entity(String imgPath, int xPos, int yPos) {
         this.imgPath = imgPath;
         this.xPos = xPos;
         this.yPos = yPos;
     }
-
-
-    @Override
-    public abstract void afficher();
 
     @Override
     public void move() {
@@ -127,45 +123,45 @@ public abstract class Entities implements Affichable, Movable{
     public String getImgPath() {
         return imgPath;
     }
-    public int getxPos() {
+    private int getxPos() {
         return xPos;
     }
-    public void setxPos(int xPos) {
+    void setxPos(int xPos) {
         this.xPos = xPos;
     }
-    public int getyPos() {
+    private int getyPos() {
         return yPos;
     }
-    public void setyPos(int yPos) {
+    void setyPos(int yPos) {
         this.yPos = yPos;
     }
     public int getMapCode(){
         return mapCode;
     }
-    public void setMapCode(int code){
+    void setMapCode(int code){
         mapCode = code;
     }
-    public Dir getNextDir() {
+    private Dir getNextDir() {
         return nextDir;
     }
     public void setNextDir(Dir nextDir) {
         this.nextDir = nextDir;
     }
-    public Dir getCurrDirection() {
+    private Dir getCurrDirection() {
         return currDirection;
     }
-    public void setCurrDirection(Dir currDirection) {
+    private void setCurrDirection(Dir currDirection) {
         this.currDirection = currDirection;
     }
     public String getId() {
         return id;
     }
-    public void setId(String id) {
+    void setId(String id) {
         this.id = id;
     }
-    public State getState(){return state;}
-    public int getxInitPos() {return xInitPos; }
-    public void setxInitPos(int xInitPos) {this.xInitPos = xInitPos;}
-    public int getyInitPos() {return yInitPos;}
-    public void setyInitPos(int yInitPos) {this.yInitPos = yInitPos;    }
+    State getState(){return state;}
+    int getxInitPos() {return xInitPos; }
+    void setxInitPos(int xInitPos) {this.xInitPos = xInitPos;}
+    int getyInitPos() {return yInitPos;}
+    void setyInitPos(int yInitPos) {this.yInitPos = yInitPos;    }
 }

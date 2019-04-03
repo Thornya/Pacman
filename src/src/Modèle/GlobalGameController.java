@@ -9,19 +9,22 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class GlobalGameController extends Observable implements Runnable {
+    private static GlobalGameController instance;
     private static int score = 0;
-    public static int superTime = -1;
+    static int superTime = -1;
     private static ScheduledExecutorService executor;
-    public static void gameOver() {
+    private static int xStart, xEnd, yStart, yEnd;
+    private static Entity entitytoMove;
+
+    static void gameOver() {
         executor.shutdown();
         Platform.runLater(() -> grilleView.popupGameOver(score));
-
     }
 
 
     @Override
     public void run() {
-
+        instance = this;
         Runnable movement = () -> {
             PacMan.getInstance().move();
             FantomeR.getInstance().setRandomDir();
@@ -42,29 +45,51 @@ public class GlobalGameController extends Observable implements Runnable {
                 case 0: {
                     PacMan.getInstance().stopSGomme();
                     superTime = -1;
-                    System.out.println("Temps terminé ! Attention ! ");
                     Platform.runLater(()->
                             grilleView.setTemps("Temps terminé ! Attention ! "));
                     break;
                 }
                 default:{
                     superTime--;
-                    System.out.println("Temps restant : " + superTime);
                     Platform.runLater(()->
                             grilleView.setTemps(String.valueOf(superTime)));
                     break;
                 }
             }
-
         };
         executor = Executors.newScheduledThreadPool(1);
-        executor.scheduleAtFixedRate(movement, 1000, 500, TimeUnit.MILLISECONDS);
+        executor.scheduleAtFixedRate(movement, 1000, 100, TimeUnit.MILLISECONDS);
     }
 
-    public static void addScore(int addedScore){
+    static void setupGraphMove(int xStartToMove, int yStartToMove, int xEndToMove, int yEndToMove, Entity ent){
+        xStart = xStartToMove;
+        yStart = yStartToMove;
+        xEnd = xEndToMove;
+        yEnd = yEndToMove;
+        entitytoMove = ent;
+        getInstance().setChanged();
+        getInstance().notifyObservers();
+    }
+
+    static void addScore(int addedScore){
         score += addedScore;
     }
-    public static int getScore(){
-        return score;
+    public static int getxStart() {
+        return xStart;
+    }
+    public static int getxEnd() {
+        return xEnd;
+    }
+    public static int getyStart() {
+        return yStart;
+    }
+    public static int getyEnd() {
+        return yEnd;
+    }
+    public static Entity getEntitytoMove() {
+        return entitytoMove;
+    }
+    private static GlobalGameController getInstance(){
+        return instance;
     }
 }

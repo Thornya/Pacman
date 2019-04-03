@@ -1,6 +1,6 @@
 package Modèle;
 
-public class PacMan extends Entities{
+public class PacMan extends Entity {
     private static PacMan thePacMan = new PacMan(13,23);
 
     private PacMan(int x, int y) {
@@ -16,12 +16,7 @@ public class PacMan extends Entities{
         return thePacMan;
     }
 
-    @Override
-    public void afficher() {
-
-    }
-
-    public void mangerSGomme() {
+    void mangerSGomme() {
         state = State.SUPERPACMAN;
         FantomeR.getInstance().state = State.SCARED;
         FantomeB.getInstance().state = State.SCARED;
@@ -30,7 +25,7 @@ public class PacMan extends Entities{
         GlobalGameController.superTime = 50;
     }
 
-    public void stopSGomme(){
+    void stopSGomme(){
         state = State.NORMAL;
         FantomeR.getInstance().state = State.NORMAL;
         FantomeB.getInstance().state = State.NORMAL;

@@ -3,7 +3,7 @@ package Modèle;
 public class FantomeO extends Fantome {
     private static FantomeO theOFantome = new FantomeO(15,14);
 
-    public FantomeO(int x, int y) {
+    FantomeO(int x, int y) {
         super("file:src\\src\\ressources\\fantomeOR.png", x, y);
         setMapCode(7);
         setId("O");
@@ -11,7 +11,7 @@ public class FantomeO extends Fantome {
         setyInitPos(y);
     }
 
-    public static FantomeO getInstance() {
+    static FantomeO getInstance() {
         return theOFantome;
     }
 }
