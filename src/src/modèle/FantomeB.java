@@ -1,6 +1,7 @@
 package modèle;
 
 public class FantomeB extends Fantome {
+    //Fantome bleu
     private static FantomeB theBFantome = new FantomeB(13,14);
 
     FantomeB(int x, int y) {

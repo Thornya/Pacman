@@ -16,6 +16,7 @@ public class PacMan extends Entity {
         return thePacMan;
     }
 
+    //Active l'état superGomme
     void mangerSGomme() {
         state = State.SUPERPACMAN;
         FantomeR.getInstance().state = State.SCARED;
@@ -25,6 +26,7 @@ public class PacMan extends Entity {
         GlobalGameController.superTime = 50;
     }
 
+    //Retire l'état superGomme
     void stopSGomme(){
         state = State.NORMAL;
         FantomeR.getInstance().state = State.NORMAL;

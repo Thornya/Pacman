@@ -9,6 +9,7 @@ class Fantome extends Entity implements Affichable{
         super(imgPath, xPos, yPos);
     }
 
+    //"IA" des fantomes (il s'agit juste d'un random)
     void setRandomDir(){
         Random rand = new Random();
         int nombreAleatoire;

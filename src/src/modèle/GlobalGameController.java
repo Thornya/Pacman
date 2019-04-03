@@ -11,11 +11,18 @@ import java.util.concurrent.TimeUnit;
 public class GlobalGameController extends Observable implements Runnable {
     private static GlobalGameController instance;
     private static int score = 0;
+
+    //Temps restant de la SuperPacGomme
     static int superTime = -1;
+
     private static ScheduledExecutorService executor;
+
+    //Attributs utilisés par la classe graphique
     private static int xStart, xEnd, yStart, yEnd;
     private static Entity entitytoMove;
 
+    //Méthode pour fin de partie
+    //Fonctionne pour victoire et défaite
     static void gameOver() {
         executor.shutdown();
         Platform.runLater(() -> grilleView.popupGameOver(score));
@@ -61,6 +68,7 @@ public class GlobalGameController extends Observable implements Runnable {
         executor.scheduleAtFixedRate(movement, 1000, 100, TimeUnit.MILLISECONDS);
     }
 
+    //Cette méthode met à jour les attributs puis notify l'observer
     static void setupGraphMove(int xStartToMove, int yStartToMove, int xEndToMove, int yEndToMove, Entity ent){
         xStart = xStartToMove;
         yStart = yStartToMove;
@@ -71,6 +79,7 @@ public class GlobalGameController extends Observable implements Runnable {
         getInstance().notifyObservers();
     }
 
+    //Getters and Setters
     static void addScore(int addedScore){
         score += addedScore;
     }

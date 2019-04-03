@@ -2,6 +2,7 @@ package modèle;
 
 
 public class FantomeR extends Fantome {
+    //Fantome rouge
     private static FantomeR theRFantome = new FantomeR(12,14);
 
     private FantomeR(int x, int y) {

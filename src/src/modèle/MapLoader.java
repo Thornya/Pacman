@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
 
-public class MapLoader implements Observer {
+public class MapLoader{
 
     /*
     0 = vide
@@ -23,12 +23,20 @@ public class MapLoader implements Observer {
     9 = porte
      */
 
+    //Compteur de Gomme restante
     private static int cptGomme=0;
+
+    //Taille de la carte
     public static final int XSIZE = 28;
     public static final int YSIZE = 31;
+
+    //Map utilisant les codes ci-dessus
     private static int[][] currentMap;
+
+    //Map d'affichable (Entities + Items)
     private static ArrayList<Affichable>[][] affichablesMap;
-//31x28
+
+    //31x28
     public static final int[][] BASEMAP = {
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},
             {1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 1},
@@ -63,21 +71,24 @@ public class MapLoader implements Observer {
             {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
     };
 
+    //Recopie la BaseMap dans la map actuelle
     private static void copyMap(){
         for (int i = 0; i<YSIZE; i++)
             System.arraycopy(BASEMAP[i], 0, currentMap[i], 0, XSIZE);
     }
+
 
     static int getValueAt(int x, int y){
         if  (currentMap.length != BASEMAP.length)
             copyMap();
         return currentMap[y][x];
     }
-
     public static ArrayList<Affichable> getEntityOrItemAt(int x, int y){
         return affichablesMap[x][y];
     }
 
+    //Permet de remplir la map d'affichable
+    //Utilise la currentMap
     private static void affichablesMapFill(){
         affichablesMap = new ArrayList[YSIZE][XSIZE];
         for (int i = 0; i<YSIZE; i++)
@@ -107,20 +118,14 @@ public class MapLoader implements Observer {
                     case 8:
                         affichablesMap[i][j].add(PacMan.getInstance());
                 }
-
             }
     }
 
+    //Prépare la map au lancement
     public static void mapSetup(){
         currentMap =  new int[YSIZE][XSIZE];
         copyMap();
         affichablesMapFill();
-    }
-
-
-    @Override
-    public void update(Observable o, Object arg) {
-
     }
 
     static void moveCase(int xStart, int yStart, int xEnd, int yEnd, Entity ent) {
@@ -131,16 +136,19 @@ public class MapLoader implements Observer {
         List<Affichable> affichableTemp = new ArrayList<>();
         if (ent instanceof PacMan) {
             for (Affichable a : affichablesMap[yEnd][xEnd]) {
+                //Pacman -> Fantome
                 if (a instanceof Fantome) {
                     if(ent.getState()==State.NORMAL){
                         GlobalGameController.gameOver();
                         return;
                     }
                     else{
-                        //manger fantome
+                        //Mange le Fantome
                         affichableTemp.add(a);
                     }
-                } else if (a instanceof Items) {
+                }
+                //Pacman -> Item
+                else if (a instanceof Items) {
                     if (a instanceof SuperGomme) {
                         GlobalGameController.addScore(50);
                         ((PacMan) ent).mangerSGomme();
@@ -150,29 +158,30 @@ public class MapLoader implements Observer {
                     cptGomme--;
                     affichableTemp.add(a);
                     Platform.runLater(()-> grilleView.miam(xEnd, yEnd));
-                    if(cptGomme<=0){
-                        System.out.println("game over");
+
+                    //Lorsqu'il n'y a plus de gomme
+                    if(cptGomme<=0)
                         GlobalGameController.gameOver();
-                    }
                 }
             }
         }
         else {
-            for (Affichable a : affichablesMap[yEnd][xEnd]) {
+            for (Affichable a : affichablesMap[yEnd][xEnd])
+                //Fantome -> Pacman
                 if (a instanceof PacMan) {
                     if (ent.getState() == State.NORMAL) {
                         GlobalGameController.gameOver();
                         return;
                     } else {
-                        //manger fantome
+                        //Mange le Fantome
                         affichableTemp.add(ent);
                         hasBeenEaten = true;
 
                     }
                 }
-            }
         }
-
+        //Parcours les affichable mangés et les retire
+        //Dans le cas d'un Fantome mangé, le téléporte au spawn
         for(Affichable affDel : affichableTemp){
             if(affDel instanceof Fantome){
                 if (hasBeenEaten)
@@ -185,12 +194,11 @@ public class MapLoader implements Observer {
             else
                 affichablesMap[yEnd][xEnd].remove(affDel);
         }
+        //Si l'entité n'a pas été mangé, la déplace sur la case
         if (!hasBeenEaten) {
             affichablesMap[yEnd][xEnd].add(ent);
             currentMap[yEnd][xEnd] = affichablesMap[yEnd][xEnd].get(affichablesMap[yEnd][xEnd].size() - 1).getMapCode();
-            Platform.runLater(() ->
-                    GlobalGameController.setupGraphMove(xStart, yStart, xEnd, yEnd, ent)
-            );
+            Platform.runLater(() -> GlobalGameController.setupGraphMove(xStart, yStart, xEnd, yEnd, ent));
         }
     }
 }

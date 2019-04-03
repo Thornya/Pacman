@@ -28,6 +28,7 @@ public abstract class Entity implements Affichable, Movable{
     @Override
     public void move() {
         if (this.getNextDir() != null){
+            //Permet de gérer la préselection des direction
             switch (this.getNextDir()){
                 case BAS:{
                     if(MapLoader.getValueAt(getxPos(), getyPos()+1) != 1){
@@ -72,6 +73,7 @@ public abstract class Entity implements Affichable, Movable{
                 }
             }
         }if (!hasMoved) {
+            //changeDirection change hasMoved en true
             switch (this.getCurrDirection()) {
                 case BAS: {
                     if (MapLoader.getValueAt(getxPos(), getyPos() + 1) != 1) {
@@ -114,12 +116,15 @@ public abstract class Entity implements Affichable, Movable{
         hasMoved = false;
     }
 
+    //Méthode permettant de changer la currentDirection
+    //Utilisez lorsque la direction dans nextDir est disponible
     private void changeDirection(){
         setCurrDirection(this.getNextDir());
         setNextDir(null);
         hasMoved = true;
     }
 
+    //Getters and Setters
     public String getImgPath() {
         return imgPath;
     }

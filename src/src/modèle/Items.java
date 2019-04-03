@@ -8,6 +8,7 @@ public class Items implements Affichable{
         this.path = path;
     }
 
+    //Getters and Setters
     public String getPath() {
         return path;
     }
