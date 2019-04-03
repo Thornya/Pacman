@@ -1,4 +1,4 @@
-package Modèle;
+package modèle;
 
 public abstract class Entity implements Affichable, Movable{
 

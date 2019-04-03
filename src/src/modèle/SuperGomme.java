@@ -1,4 +1,4 @@
-package Modèle;
+package modèle;
 
 public class SuperGomme extends Gomme {
 
