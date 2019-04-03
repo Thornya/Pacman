@@ -1,4 +1,4 @@
-package modèle;
+package Modèle;
 
 import javafx.application.Platform;
 import vue.grilleView;

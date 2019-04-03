@@ -1,4 +1,4 @@
-package modèle;
+package Modèle;
 
 public class PacMan extends Entity {
     private static PacMan thePacMan = new PacMan(13,23);

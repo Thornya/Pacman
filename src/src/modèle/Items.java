@@ -1,4 +1,4 @@
-package modèle;
+package Modèle;
 
 public class Items implements Affichable{
     String path;

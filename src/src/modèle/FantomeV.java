@@ -1,4 +1,4 @@
-package modèle;
+package Modèle;
 
 public class FantomeV extends Fantome {
     private static FantomeV theVFantome = new FantomeV(14,14);

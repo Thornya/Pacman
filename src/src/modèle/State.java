@@ -1,4 +1,4 @@
-package modèle;
+package Modèle;
 
 public enum State {
     NORMAL,

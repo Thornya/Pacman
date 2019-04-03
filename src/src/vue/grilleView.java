@@ -1,7 +1,7 @@
 package vue;
 
-import Modèle.Dir;
-import Modèle.*;
+import modèle.Dir;
+import modèle.*;
 import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.geometry.Rectangle2D;

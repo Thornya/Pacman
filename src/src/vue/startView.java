@@ -75,7 +75,7 @@ public class startView extends Application {
     public static void main(String[] args){
         Application.launch(args);
     }
-    public static void setupMenuColonnes(GridPane gp, ColumnConstraints c1, ColumnConstraints c2){
+    static void setupMenuColonnes(GridPane gp, ColumnConstraints c1, ColumnConstraints c2){
         gp.addColumn(0);
         gp.getColumnConstraints().add(c1);
         gp.addColumn(1);
@@ -84,5 +84,4 @@ public class startView extends Application {
         gp.getColumnConstraints().add(c1);
 
     }
-
 }
